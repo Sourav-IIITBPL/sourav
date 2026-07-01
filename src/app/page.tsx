@@ -81,16 +81,6 @@ const scaleIn: any = {
 };
 
 /* ─────────────────────────────────────────────
-   Rotating Headlines
-   ───────────────────────────────────────────── */
-
-const headlines = [
-  'Protocol Engineer',
-  'Smart Contract Security Researcher',
-  'Web3 Full-Stack Engineer',
-];
-
-/* ─────────────────────────────────────────────
    Sub-Components
    ───────────────────────────────────────────── */
 
@@ -122,7 +112,7 @@ function StatCard({ label, value, suffix, size, inView }: {
         right: '-30%',
         width: '200px',
         height: '200px',
-        background: 'radial-gradient(circle, rgba(242,169,59,0.04) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%)',
         pointerEvents: 'none',
       }} />
       <span
@@ -187,15 +177,6 @@ function CopyButton({ text }: { text: string }) {
    ───────────────────────────────────────────── */
 
 export default function HomePage() {
-  /* ── Rotating headline state ── */
-  const [headlineIndex, setHeadlineIndex] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setHeadlineIndex((prev) => (prev + 1) % headlines.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
-
   /* ── Stats IntersectionObserver ── */
   const statsSection = useInView();
 
@@ -204,26 +185,23 @@ export default function HomePage() {
   const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setFormStatus('loading');
     setErrorMsg('');
     try {
+      const formPayload = new FormData(e.target);
+      formPayload.append("access_key", "648d6616-d5e5-4fd8-8615-90faa9ada7bc");
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || '',
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
+        body: formPayload,
       });
-      if (!res.ok) throw new Error('Submission failed');
       const data = await res.json();
       if (data.success) {
         setFormStatus('success');
+        e.target.reset();
         setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setFormStatus('idle'), 5000);
       } else {
         throw new Error(data.message || 'Submission failed');
       }
@@ -232,6 +210,7 @@ export default function HomePage() {
       setErrorMsg(err.message || 'Something went wrong. Please try again.');
     }
   };
+
 
   return (
     <>
@@ -271,25 +250,18 @@ export default function HomePage() {
               Sourav Yadav
             </motion.h1>
 
-            {/* Rotating headline */}
-            <motion.div variants={fadeUp} custom={1} style={{ height: '44px', marginBottom: '20px', overflow: 'hidden' }}>
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={headlineIndex}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -16 }}
-                  transition={{ duration: 0.4, ease: 'easeInOut' }}
-                  style={{
-                    fontFamily: 'var(--font-mono), monospace',
-                    fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-                    color: 'var(--accent-verify)',
-                    letterSpacing: '0.02em',
-                  }}
-                >
-                  {headlines[headlineIndex]}
-                </motion.p>
-              </AnimatePresence>
+            {/* Headlines */}
+            <motion.div variants={fadeUp} custom={1} style={{ marginBottom: '20px' }}>
+              <h2 style={{
+                fontFamily: 'var(--font-mono), monospace',
+                fontSize: 'clamp(0.9rem, 2vw, 1.125rem)',
+                color: 'var(--accent-verify)',
+                letterSpacing: '0.02em',
+                lineHeight: 1.6,
+                fontWeight: 500,
+              }}>
+                Protocol Engineer <span style={{ color: 'var(--text-muted)', margin: '0 8px' }}>•</span> Smart Contract Security Researcher <span style={{ color: 'var(--text-muted)', margin: '0 8px' }}>•</span> Web3 Full-Stack Engineer
+              </h2>
             </motion.div>
 
             {/* Supporting line */}
@@ -345,7 +317,7 @@ export default function HomePage() {
             <div style={{
               position: 'absolute',
               inset: '-20px',
-              background: 'radial-gradient(circle at center, rgba(53,199,192,0.12) 0%, rgba(242,169,59,0.06) 50%, transparent 70%)',
+              background: 'radial-gradient(circle at center, rgba(16,185,129,0.12) 0%, rgba(59,130,246,0.06) 50%, transparent 70%)',
               borderRadius: '20px',
               filter: 'blur(30px)',
               pointerEvents: 'none',
@@ -384,11 +356,114 @@ export default function HomePage() {
             fontSize: '1.0625rem',
             lineHeight: 1.8,
             color: 'var(--text-muted)',
+            marginBottom: '16px',
           }}>
-            I&apos;m a Web3 engineer who builds and breaks decentralized systems. Over the past year, I&apos;ve audited 20+ production DeFi protocols across Sherlock, Code4rena, and Cantina — AMMs, lending markets, vaults, and cross-chain infrastructure — surfacing 11 validated vulnerabilities. On the builder side, I&apos;ve shipped pre-transaction security middleware, a yield-generating payment protocol for B2B settlements, and multi-chain DEX routing infrastructure spanning 9 networks. I think in invariants, threat models, and protocol accounting, and I write code the way I audit it — assuming it will be attacked. Currently at IIIT Bhopal, graduating 2027.
+            I&apos;m a Web3 Full-Stack Engineer and Smart Contract Security Researcher who builds resilient decentralized systems and breaks them before blackhats do. My journey in the Ethereum ecosystem is driven by a deep fascination with protocol accounting, cryptography, and mechanism design. Over the past year, I have audited 20+ production DeFi protocols across Sherlock, Code4rena, and Cantina — diving deep into complex AMMs, lending markets, ERC4626 vaults, and cross-chain messaging infrastructure. This rigorous security research has surfaced 11 high-impact, validated vulnerabilities, saving protocols from potential exploits.
+          </p>
+          <p style={{
+            maxWidth: '800px',
+            fontSize: '1.0625rem',
+            lineHeight: 1.8,
+            color: 'var(--text-muted)',
+          }}>
+            On the builder side, I engineer secure, high-performance Web3 applications. I&apos;ve architected and shipped pre-transaction security middleware, a yield-generating payment protocol tailored for B2B settlements, and a multi-chain DEX routing infrastructure that seamlessly spans 9 different networks. I think in invariants, threat models, and edge cases. I write my code exactly the way I audit it — operating under the fundamental assumption that it will be relentlessly attacked. I am currently pursuing my B.Tech at IIIT Bhopal, graduating in 2027, and continuously pushing the boundaries of Web3 security and scalable architecture.
           </p>
         </motion.div>
       </section>
+
+      {/* ═══════════════════════════════════════════
+          5. FEATURED PROFILES
+          ═══════════════════════════════════════════ */}
+      <section className="section-spacing container-main">
+        <SectionEyebrow id="SEC-04" label="Profiles" />
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={staggerContainer}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+            gap: '16px',
+          }}
+        >
+          {profiles.map((profile, idx) => {
+            const IconComponent = profile.icon;
+            return (
+              <motion.a
+                key={profile.name}
+                href={profile.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card"
+                variants={scaleIn}
+                custom={idx}
+                style={{
+                  padding: '24px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '12px',
+                  textDecoration: 'none',
+                  cursor: 'pointer',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '8px',
+                    background: 'rgba(59,130,246,0.08)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px solid rgba(59,130,246,0.15)',
+                  }}>
+                    <IconComponent size={20} style={{ color: 'var(--accent-flag)' }} />
+                  </div>
+                  <div>
+                    <span style={{
+                      fontSize: '0.9375rem',
+                      fontWeight: 600,
+                      color: 'var(--text-primary)',
+                      display: 'block',
+                    }}>
+                      {profile.name}
+                    </span>
+                    <span style={{
+                      fontFamily: 'var(--font-mono), monospace',
+                      fontSize: '0.75rem',
+                      color: 'var(--text-muted)',
+                    }}>
+                      {profile.handle}
+                    </span>
+                  </div>
+                </div>
+                {profile.stat && (
+                  <span style={{
+                    fontSize: '0.8125rem',
+                    color: 'var(--accent-verify)',
+                    fontFamily: 'var(--font-mono), monospace',
+                  }}>
+                    {profile.stat}
+                  </span>
+                )}
+                <span style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  fontSize: '0.75rem',
+                  color: 'var(--text-muted)',
+                  marginTop: 'auto',
+                }}>
+                  Visit Profile <ExternalLink size={11} />
+                </span>
+              </motion.a>
+            );
+          })}
+        </motion.div>
+      </section>
+
+
 
       {/* ═══════════════════════════════════════════
           3. STATISTICS
@@ -534,98 +609,6 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          5. FEATURED PROFILES
-          ═══════════════════════════════════════════ */}
-      <section className="section-spacing container-main">
-        <SectionEyebrow id="SEC-04" label="Profiles" />
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={staggerContainer}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
-            gap: '16px',
-          }}
-        >
-          {profiles.map((profile, idx) => {
-            const IconComponent = profile.icon;
-            return (
-              <motion.a
-                key={profile.name}
-                href={profile.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card"
-                variants={scaleIn}
-                custom={idx}
-                style={{
-                  padding: '24px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '12px',
-                  textDecoration: 'none',
-                  cursor: 'pointer',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <div style={{
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '8px',
-                    background: 'rgba(242,169,59,0.08)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    border: '1px solid rgba(242,169,59,0.15)',
-                  }}>
-                    <IconComponent size={20} style={{ color: 'var(--accent-flag)' }} />
-                  </div>
-                  <div>
-                    <span style={{
-                      fontSize: '0.9375rem',
-                      fontWeight: 600,
-                      color: 'var(--text-primary)',
-                      display: 'block',
-                    }}>
-                      {profile.name}
-                    </span>
-                    <span style={{
-                      fontFamily: 'var(--font-mono), monospace',
-                      fontSize: '0.75rem',
-                      color: 'var(--text-muted)',
-                    }}>
-                      {profile.handle}
-                    </span>
-                  </div>
-                </div>
-                {profile.stat && (
-                  <span style={{
-                    fontSize: '0.8125rem',
-                    color: 'var(--accent-verify)',
-                    fontFamily: 'var(--font-mono), monospace',
-                  }}>
-                    {profile.stat}
-                  </span>
-                )}
-                <span style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  fontSize: '0.75rem',
-                  color: 'var(--text-muted)',
-                  marginTop: 'auto',
-                }}>
-                  Visit Profile <ExternalLink size={11} />
-                </span>
-              </motion.a>
-            );
-          })}
-        </motion.div>
-      </section>
-
-      {/* ═══════════════════════════════════════════
           6. LATEST SECURITY RESEARCH
           ═══════════════════════════════════════════ */}
       <section className="section-spacing container-main">
@@ -670,9 +653,9 @@ export default function HomePage() {
                 </h4>
                 <span className="badge" style={{
                   background: finding.platform === 'Sherlock'
-                    ? 'rgba(53,199,192,0.1)'
+                    ? 'rgba(16,185,129,0.1)'
                     : finding.platform === 'Code4rena'
-                      ? 'rgba(242,169,59,0.1)'
+                      ? 'rgba(59,130,246,0.1)'
                       : 'rgba(139,152,165,0.1)',
                   color: finding.platform === 'Sherlock'
                     ? 'var(--accent-verify)'
@@ -716,10 +699,10 @@ export default function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════
-          7. HACKATHONS & ACHIEVEMENTS
+          7. HACKATHONS, ACHIEVEMENTS & COURSES
           ═══════════════════════════════════════════ */}
       <section className="section-spacing container-main">
-        <SectionEyebrow id="SEC-06" label="Hackathons & Achievements" />
+        <SectionEyebrow id="SEC-06" label="Hackathons, Achievements & Courses" />
         <div className="timeline-rail" style={{ paddingLeft: '32px' }}>
           {achievements.map((achievement, idx) => (
             <motion.div
@@ -778,41 +761,48 @@ export default function HomePage() {
                 {achievement.description}
               </p>
 
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                {achievement.certificatePath && (
-                  <a
-                    href={achievement.certificatePath}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontSize: '0.8125rem',
-                      fontWeight: 500,
-                      color: 'var(--accent-verify)',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                    }}
-                  >
-                    View Certificate <ExternalLink size={12} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {achievement.certificatePath && achievement.certificatePath.match(/\.(jpeg|jpg|gif|png)$/i) && (
+                  <a href={achievement.certificatePath} target="_blank" rel="noopener noreferrer" style={{ display: 'block', maxWidth: '300px', overflow: 'hidden', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                    <Image src={achievement.certificatePath} alt={achievement.title} width={300} height={200} style={{ width: '100%', height: 'auto', display: 'block' }} />
                   </a>
                 )}
-                {achievement.link && (
-                  <a
-                    href={achievement.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      fontSize: '0.8125rem',
-                      fontWeight: 500,
-                      color: 'var(--accent-flag)',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                    }}
-                  >
-                    View Profile <ArrowRight size={12} />
-                  </a>
-                )}
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  {achievement.certificatePath && !achievement.certificatePath.match(/\.(jpeg|jpg|gif|png)$/i) && (
+                    <a
+                      href={achievement.certificatePath}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontSize: '0.8125rem',
+                        fontWeight: 500,
+                        color: 'var(--accent-verify)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                      }}
+                    >
+                      View Certificate <ExternalLink size={12} />
+                    </a>
+                  )}
+                  {achievement.link && (
+                    <a
+                      href={achievement.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        fontSize: '0.8125rem',
+                        fontWeight: 500,
+                        color: 'var(--accent-flag)',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px',
+                      }}
+                    >
+                      View Profile <ArrowRight size={12} />
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
@@ -844,9 +834,14 @@ export default function HomePage() {
                 {category.label}
               </h4>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                {category.items.map((item) => (
-                  <span key={item} className="badge">{item}</span>
-                ))}
+                {category.items.map((item: any) => {
+                  const Icon = item.icon;
+                  return (
+                    <span key={item.name} className="badge" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                      <Icon size={14} style={{ color: item.color || 'var(--accent-flag)' }} /> {item.name}
+                    </span>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
@@ -877,11 +872,11 @@ export default function HomePage() {
             width: '48px',
             height: '48px',
             borderRadius: '12px',
-            background: 'rgba(53,199,192,0.08)',
+            background: 'rgba(16,185,129,0.08)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            border: '1px solid rgba(53,199,192,0.15)',
+            border: '1px solid rgba(16,185,129,0.15)',
             flexShrink: 0,
           }}>
             <GraduationCap size={24} style={{ color: 'var(--accent-verify)' }} />
@@ -906,15 +901,15 @@ export default function HomePage() {
             <div style={{ display: 'flex', gap: '16px', marginTop: '8px', flexWrap: 'wrap' }}>
               <span className="badge" style={{
                 color: 'var(--accent-verify)',
-                borderColor: 'rgba(53,199,192,0.25)',
-                background: 'rgba(53,199,192,0.06)',
+                borderColor: 'rgba(16,185,129,0.25)',
+                background: 'rgba(16,185,129,0.06)',
               }}>
                 CGPA: 7.57 / 10
               </span>
               <span className="badge" style={{
                 color: 'var(--accent-flag)',
-                borderColor: 'rgba(242,169,59,0.25)',
-                background: 'rgba(242,169,59,0.06)',
+                borderColor: 'rgba(59,130,246,0.25)',
+                background: 'rgba(59,130,246,0.06)',
               }}>
                 Expected 2027
               </span>
@@ -951,83 +946,81 @@ export default function HomePage() {
               Get in touch
             </h3>
 
-            {formStatus === 'success' ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="card"
-                style={{
-                  padding: '32px',
-                  textAlign: 'center',
-                  borderColor: 'var(--accent-verify)',
-                }}
-              >
-                <Check size={32} style={{ color: 'var(--accent-verify)', margin: '0 auto 12px' }} />
-                <p style={{ color: 'var(--accent-verify)', fontWeight: 500, marginBottom: '4px' }}>
-                  Message sent!
-                </p>
-                <p style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-                  I&apos;ll reply within a day or two.
-                </p>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                {(['name', 'email'] as const).map((field) => (
-                  <div key={field}>
-                    <label
-                      htmlFor={field}
-                      style={{
-                        display: 'block',
-                        fontSize: '0.8125rem',
-                        color: 'var(--text-muted)',
-                        marginBottom: '6px',
-                        textTransform: 'capitalize',
-                      }}
-                    >
-                      {field}
-                    </label>
-                    <input
-                      id={field}
-                      type={field === 'email' ? 'email' : 'text'}
-                      required
-                      value={formData[field]}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, [field]: e.target.value }))}
-                      disabled={formStatus === 'loading'}
-                      style={{
-                        width: '100%',
-                        padding: '12px 16px',
-                        background: 'var(--bg-surface)',
-                        border: '1px solid var(--border)',
-                        borderRadius: '6px',
-                        color: 'var(--text-primary)',
-                        fontSize: '0.9375rem',
-                        fontFamily: 'var(--font-body), sans-serif',
-                        transition: 'border-color var(--transition-base)',
-                        outline: 'none',
-                      }}
-                      onFocus={(e) => (e.target.style.borderColor = 'var(--accent-flag)')}
-                      onBlur={(e) => (e.target.style.borderColor = 'var(--border)')}
-                    />
-                  </div>
-                ))}
-                <div>
+            <AnimatePresence>
+              {formStatus === 'success' && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setFormStatus('idle')}
+                  style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100vw',
+                    height: '100vh',
+                    zIndex: 9999,
+                    background: 'rgba(11, 15, 20, 0.7)',
+                    backdropFilter: 'blur(8px)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <motion.div
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.9, opacity: 0 }}
+                    className="card"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      padding: '48px 32px',
+                      textAlign: 'center',
+                      borderColor: 'var(--accent-verify)',
+                      maxWidth: '450px',
+                      background: 'var(--bg-surface)',
+                    }}
+                  >
+                    <Check size={48} style={{ color: 'var(--accent-verify)', margin: '0 auto 24px' }} />
+                    <p style={{
+                      fontFamily: 'var(--font-display), sans-serif',
+                      fontSize: '1.5rem',
+                      color: 'var(--text-primary)',
+                      fontWeight: 600,
+                      marginBottom: '8px'
+                    }}>
+                      Message sent!
+                    </p>
+                    <p style={{ fontSize: '1rem', color: 'var(--text-muted)', lineHeight: 1.6 }}>
+                      Your message has been sent directly to <strong style={{ color: 'var(--text-primary)' }}>sourav.dev.official@outlook.com</strong>. I&apos;ll reply within a day or two.
+                    </p>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              {(['name', 'email'] as const).map((field) => (
+                <div key={field}>
                   <label
-                    htmlFor="message"
+                    htmlFor={field}
                     style={{
                       display: 'block',
                       fontSize: '0.8125rem',
                       color: 'var(--text-muted)',
                       marginBottom: '6px',
+                      textTransform: 'capitalize',
                     }}
                   >
-                    Message
+                    {field}
                   </label>
-                  <textarea
-                    id="message"
+                  <input
+                    id={field}
+                    name={field}
+                    type={field === 'email' ? 'email' : 'text'}
                     required
-                    rows={5}
-                    value={formData.message}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
+                    value={formData[field]}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, [field]: e.target.value }))}
                     disabled={formStatus === 'loading'}
                     style={{
                       width: '100%',
@@ -1038,44 +1031,80 @@ export default function HomePage() {
                       color: 'var(--text-primary)',
                       fontSize: '0.9375rem',
                       fontFamily: 'var(--font-body), sans-serif',
-                      resize: 'vertical',
-                      outline: 'none',
                       transition: 'border-color var(--transition-base)',
+                      outline: 'none',
                     }}
                     onFocus={(e) => (e.target.style.borderColor = 'var(--accent-flag)')}
                     onBlur={(e) => (e.target.style.borderColor = 'var(--border)')}
                   />
                 </div>
-
-                {formStatus === 'error' && (
-                  <p style={{ fontSize: '0.8125rem', color: 'var(--severity-high)' }}>
-                    {errorMsg}
-                  </p>
-                )}
-
-                <button
-                  type="submit"
-                  className="btn-primary"
-                  disabled={formStatus === 'loading'}
+              ))}
+              <div>
+                <label
+                  htmlFor="message"
                   style={{
-                    justifyContent: 'center',
-                    opacity: formStatus === 'loading' ? 0.7 : 1,
+                    display: 'block',
+                    fontSize: '0.8125rem',
+                    color: 'var(--text-muted)',
+                    marginBottom: '6px',
                   }}
                 >
-                  {formStatus === 'loading' ? (
-                    <>
-                      <Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send size={16} />
-                      Send Message
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={5}
+                  value={formData.message}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
+                  disabled={formStatus === 'loading'}
+                  style={{
+                    width: '100%',
+                    padding: '12px 16px',
+                    background: 'var(--bg-surface)',
+                    border: '1px solid var(--border)',
+                    borderRadius: '6px',
+                    color: 'var(--text-primary)',
+                    fontSize: '0.9375rem',
+                    fontFamily: 'var(--font-body), sans-serif',
+                    resize: 'vertical',
+                    outline: 'none',
+                    transition: 'border-color var(--transition-base)',
+                  }}
+                  onFocus={(e) => (e.target.style.borderColor = 'var(--accent-flag)')}
+                  onBlur={(e) => (e.target.style.borderColor = 'var(--border)')}
+                />
+              </div>
+
+              {formStatus === 'error' && (
+                <p style={{ fontSize: '0.8125rem', color: 'var(--severity-high)' }}>
+                  {errorMsg}
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="btn-primary"
+                disabled={formStatus === 'loading'}
+                style={{
+                  justifyContent: 'center',
+                  opacity: formStatus === 'loading' ? 0.7 : 1,
+                }}
+              >
+                {formStatus === 'loading' ? (
+                  <>
+                    <Loader2 size={16} style={{ animation: 'spin 1s linear infinite' }} />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send size={16} />
+                    Send Message
+                  </>
+                )}
+              </button>
+            </form>
           </motion.div>
 
           {/* Contact Links */}

@@ -6,19 +6,20 @@
    ============================================================ */
 
 :root {
-  /* ── Color: dark base, dual semantic accent ── */
-  --bg-base: #0B0F14;
-  --bg-surface: #12171D;
-  --border: #232B33;
-  --text-primary: #E8EDF2;
-  --text-muted: #8B98A5;
-  --accent-flag: #F2A93B;
-  --accent-verify: #35C7C0;
+  /* Color Tokens - Modern Zinc & Vibrant Blue/Emerald Theme */
+  --bg-base: #09090B;
+  --bg-surface: #18181B;
+  --border: #27272A;
+  --text-primary: #FAFAFA;
+  --text-muted: #A1A1AA;
+  
+  --accent-flag: #3B82F6; /* Vibrant Bright Blue */
+  --accent-verify: #10B981; /* Vibrant Emerald Green */
 
-  /* Severity (audit-report semantics) */
-  --severity-high: #E5484D;
-  --severity-medium: #F2A93B;
-  --severity-low: #35C7C0;
+  /* Severity (audit-report semantics) - ZERO ORANGE */
+  --severity-high: #EF4444; /* Red */
+  --severity-medium: #EAB308; /* Yellow */
+  --severity-low: #3B82F6; /* Blue */
 
   /* Spacing rhythm */
   --section-gap: 96px;

@@ -1,42 +1,18 @@
-import { Shield, Code2, Award } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+import { SiGithub, SiLeetcode } from "react-icons/si";
 
-export const GithubIcon = (props: any) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-    <path d="M9 18c-4.51 2-5-2-7-2" />
-  </svg>
-);
-
-export const LinkedinIcon = (props: any) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect width="4" height="12" x="2" y="9" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
+export const FaviconIcon = (domain: string) => {
+  const Icon = (props: any) => (
+    <img 
+      src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`} 
+      width={props.size || 20} 
+      height={props.size || 20} 
+      alt={`${domain} logo`} 
+      style={{ borderRadius: '4px', objectFit: 'contain' }} 
+    />
+  );
+  Icon.displayName = `FaviconIcon_${domain}`;
+  return Icon;
+};
 
 export interface SocialProfile {
   name: string;
@@ -52,31 +28,37 @@ export const profiles: SocialProfile[] = [
     name: "GitHub",
     handle: "Sourav-IIITBPL",
     url: "https://github.com/Sourav-IIITBPL",
-    icon: GithubIcon,
+    icon: SiGithub,
+  },
+  {
+    name: "Cyfrin",
+    handle: "sourav_dev",
+    url: "https://profiles.cyfrin.io/u/sourav_dev",
+    icon: FaviconIcon("cyfrin.io"),
   },
   {
     name: "Sherlock",
     handle: "sourav_DEV",
     url: "https://audits.sherlock.xyz/watson/sourav_DEV",
-    icon: Shield,
+    icon: FaviconIcon("sherlock.xyz"),
   },
   {
     name: "Code4rena",
     handle: "@Sourav_DEV",
     url: "https://code4rena.com/@Sourav_DEV",
-    icon: Code2,
+    icon: FaviconIcon("code4rena.com"),
   },
   {
     name: "Cantina",
     handle: "0xSourav",
     url: "https://cantina.xyz/u/0xSourav",
-    icon: Shield,
+    icon: FaviconIcon("cantina.xyz"),
   },
   {
     name: "LeetCode",
     handle: "SouravIIIT",
     url: "https://leetcode.com/u/SouravIIIT",
-    icon: Award,
+    icon: SiLeetcode,
     stat: "1868 Rating · Knight",
   },
 ];
@@ -108,8 +90,8 @@ export const contactLinks: ContactLink[] = [
   },
   {
     label: "Telegram",
-    value: "@soruav-developer",
-    url: "https://t.me/soruav_developer",
+    value: "@sourav-developer",
+    url: "https://t.me/sourav-developer",
   },
   {
     label: "X",
@@ -123,5 +105,5 @@ export const footerProfiles = [
   { name: "Sherlock", url: "https://audits.sherlock.xyz/watson/sourav_DEV" },
   { name: "Code4rena", url: "https://code4rena.com/@Sourav_DEV" },
   { name: "Cantina", url: "https://cantina.xyz/u/0xSourav" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/sourav-yadav" },
+  { name: "LinkedIn", url: "https://linkedin.com/in/0xsourav" },
 ];

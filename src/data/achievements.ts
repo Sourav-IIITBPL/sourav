@@ -38,9 +38,8 @@ export const achievements: Achievement[] = [
   },
   {
     year: "Ongoing",
-    title: "Cyfrin Updraft Certified",
-    description:
-      "Advanced Solidity, security, protocol testing",
+    title: "Cyfrin Updraft Web3 Courses",
+    description: "Advanced Solidity, Security, and Protocol Testing courses",
     link: "https://profiles.cyfrin.io/u/sourav_dev",
   },
 ];
