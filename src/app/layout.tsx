@@ -24,11 +24,13 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sourav Yadav — Protocol Engineer & Smart Contract Security Researcher",
+  title:
+    "Sourav Yadav — Protocol Engineer & Smart Contract Security Researcher",
   description:
     "Web3 engineer building secure protocol infrastructure, auditing production DeFi systems, and shipping full-stack Web3 applications. 21+ competitive audits, 11 validated findings.",
   openGraph: {
-    title: "Sourav Yadav — Protocol Engineer & Smart Contract Security Researcher",
+    title:
+      "Sourav Yadav — Protocol Engineer & Smart Contract Security Researcher",
     description:
       "Web3 engineer building secure protocol infrastructure, auditing production DeFi systems, and shipping full-stack Web3 applications.",
     images: [{ url: "/images/og-image.png", width: 1200, height: 630 }],

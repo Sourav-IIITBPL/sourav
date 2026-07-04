@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import { projects } from '@/data/projects';
-import SectionEyebrow from '@/components/SectionEyebrow';
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { projects } from "@/data/projects";
+import SectionEyebrow from "@/components/SectionEyebrow";
 
 /* ── Static params ── */
 export function generateStaticParams() {
@@ -29,7 +29,7 @@ function getInitials(name: string): string {
   return name
     .split(/\s+/)
     .map((w) => w[0])
-    .join('')
+    .join("")
     .toUpperCase()
     .slice(0, 2);
 }
@@ -52,13 +52,13 @@ export default async function ProjectPage({
             ════════════════════════════════════════════ */}
         <section
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
             gap: 24,
-            paddingBottom: 'var(--section-gap)',
-            borderBottom: '1px solid var(--border)',
+            paddingBottom: "var(--section-gap)",
+            borderBottom: "1px solid var(--border)",
           }}
         >
           {/* Logo / Placeholder */}
@@ -68,9 +68,9 @@ export default async function ProjectPage({
                 width: 120,
                 height: 120,
                 borderRadius: 16,
-                overflow: 'hidden',
-                background: 'var(--bg-surface)',
-                border: '1px solid var(--border)',
+                overflow: "hidden",
+                background: "var(--bg-surface)",
+                border: "1px solid var(--border)",
               }}
             >
               <Image
@@ -79,9 +79,9 @@ export default async function ProjectPage({
                 width={120}
                 height={120}
                 style={{
-                  objectFit: 'cover',
-                  width: '100%',
-                  height: '100%',
+                  objectFit: "cover",
+                  width: "100%",
+                  height: "100%",
                 }}
                 priority
               />
@@ -93,12 +93,12 @@ export default async function ProjectPage({
                 width: 120,
                 height: 120,
                 borderRadius: 16,
-                fontSize: '2rem',
+                fontSize: "2rem",
                 fontWeight: 700,
-                fontFamily: 'var(--font-display), sans-serif',
-                color: 'var(--accent-flag)',
-                background: 'var(--bg-surface)',
-                border: '1px dashed var(--border)',
+                fontFamily: "var(--font-display), sans-serif",
+                color: "var(--accent-flag)",
+                background: "var(--bg-surface)",
+                border: "1px dashed var(--border)",
               }}
             >
               {getInitials(project.name)}
@@ -107,10 +107,10 @@ export default async function ProjectPage({
 
           <h1
             style={{
-              fontFamily: 'var(--font-display), sans-serif',
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontFamily: "var(--font-display), sans-serif",
+              fontSize: "clamp(2rem, 5vw, 3rem)",
               fontWeight: 700,
-              color: 'var(--text-primary)',
+              color: "var(--text-primary)",
               lineHeight: 1.15,
             }}
           >
@@ -119,9 +119,9 @@ export default async function ProjectPage({
 
           <p
             style={{
-              fontFamily: 'var(--font-body), sans-serif',
-              fontSize: '1.125rem',
-              color: 'var(--accent-verify)',
+              fontFamily: "var(--font-body), sans-serif",
+              fontSize: "1.125rem",
+              color: "var(--accent-verify)",
               fontWeight: 500,
               maxWidth: 600,
             }}
@@ -132,10 +132,10 @@ export default async function ProjectPage({
           {/* Buttons */}
           <div
             style={{
-              display: 'flex',
+              display: "flex",
               gap: 12,
-              flexWrap: 'wrap',
-              justifyContent: 'center',
+              flexWrap: "wrap",
+              justifyContent: "center",
             }}
           >
             <a
@@ -143,7 +143,7 @@ export default async function ProjectPage({
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"
-              style={{ fontFamily: 'var(--font-body), sans-serif' }}
+              style={{ fontFamily: "var(--font-body), sans-serif" }}
             >
               GitHub ↗
             </a>
@@ -153,7 +153,7 @@ export default async function ProjectPage({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary"
-                style={{ fontFamily: 'var(--font-body), sans-serif' }}
+                style={{ fontFamily: "var(--font-body), sans-serif" }}
               >
                 Live Demo ↗
               </a>
@@ -168,10 +168,10 @@ export default async function ProjectPage({
           <SectionEyebrow id="SEC-P1" label="Overview" />
           <p
             style={{
-              fontFamily: 'var(--font-body), sans-serif',
-              fontSize: '1rem',
+              fontFamily: "var(--font-body), sans-serif",
+              fontSize: "1rem",
               lineHeight: 1.8,
-              color: 'var(--text-muted)',
+              color: "var(--text-muted)",
               maxWidth: 800,
               marginTop: 16,
             }}
@@ -188,8 +188,8 @@ export default async function ProjectPage({
             <SectionEyebrow id="SEC-P1-B" label="Key Metrics" />
             <div
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
                 gap: 16,
                 marginTop: 16,
               }}
@@ -199,15 +199,32 @@ export default async function ProjectPage({
                   key={i}
                   className="card"
                   style={{
-                    padding: '20px',
-                    display: 'flex',
-                    flexDirection: 'column',
+                    padding: "20px",
+                    display: "flex",
+                    flexDirection: "column",
                     gap: 8,
-                    textAlign: 'center'
+                    textAlign: "center",
                   }}
                 >
-                  <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono), monospace' }}>{metric.label}</span>
-                  <span style={{ fontSize: '1.25rem', color: 'var(--text-primary)', fontWeight: 600, fontFamily: 'var(--font-display), sans-serif' }}>{metric.value}</span>
+                  <span
+                    style={{
+                      fontSize: "0.85rem",
+                      color: "var(--text-muted)",
+                      fontFamily: "var(--font-mono), monospace",
+                    }}
+                  >
+                    {metric.label}
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "1.25rem",
+                      color: "var(--text-primary)",
+                      fontWeight: 600,
+                      fontFamily: "var(--font-display), sans-serif",
+                    }}
+                  >
+                    {metric.value}
+                  </span>
                 </div>
               ))}
             </div>
@@ -223,16 +240,16 @@ export default async function ProjectPage({
             style={{
               marginTop: 16,
               paddingLeft: 20,
-              borderLeft: '3px solid var(--accent-flag)',
+              borderLeft: "3px solid var(--accent-flag)",
             }}
           >
             <p
               style={{
-                fontFamily: 'var(--font-body), sans-serif',
-                fontSize: '1rem',
+                fontFamily: "var(--font-body), sans-serif",
+                fontSize: "1rem",
                 lineHeight: 1.8,
-                color: 'var(--text-primary)',
-                fontStyle: 'italic',
+                color: "var(--text-primary)",
+                fontStyle: "italic",
               }}
             >
               {project.problem}
@@ -247,10 +264,10 @@ export default async function ProjectPage({
           <SectionEyebrow id="SEC-P3" label="Architecture" />
           <p
             style={{
-              fontFamily: 'var(--font-body), sans-serif',
-              fontSize: '1rem',
+              fontFamily: "var(--font-body), sans-serif",
+              fontSize: "1rem",
               lineHeight: 1.8,
-              color: 'var(--text-muted)',
+              color: "var(--text-muted)",
               maxWidth: 800,
               marginTop: 16,
             }}
@@ -266,8 +283,8 @@ export default async function ProjectPage({
           <SectionEyebrow id="SEC-P4" label="Tech Stack" />
           <div
             style={{
-              display: 'flex',
-              flexWrap: 'wrap',
+              display: "flex",
+              flexWrap: "wrap",
               gap: 10,
               marginTop: 16,
             }}
@@ -277,9 +294,9 @@ export default async function ProjectPage({
                 key={tech}
                 className="badge"
                 style={{
-                  fontFamily: 'var(--font-mono), monospace',
-                  fontSize: '0.8125rem',
-                  padding: '6px 14px',
+                  fontFamily: "var(--font-mono), monospace",
+                  fontSize: "0.8125rem",
+                  padding: "6px 14px",
                 }}
               >
                 {tech}
@@ -296,11 +313,11 @@ export default async function ProjectPage({
             <SectionEyebrow id="SEC-P4-B" label="Key Features" />
             <ul
               style={{
-                listStyle: 'none',
+                listStyle: "none",
                 padding: 0,
                 marginTop: 16,
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
                 gap: 16,
               }}
             >
@@ -309,23 +326,23 @@ export default async function ProjectPage({
                   key={i}
                   className="card"
                   style={{
-                    padding: '16px 20px',
-                    display: 'flex',
-                    alignItems: 'flex-start',
+                    padding: "16px 20px",
+                    display: "flex",
+                    alignItems: "flex-start",
                     gap: 12,
-                    fontFamily: 'var(--font-body), sans-serif',
-                    fontSize: '0.9375rem',
+                    fontFamily: "var(--font-body), sans-serif",
+                    fontSize: "0.9375rem",
                     lineHeight: 1.6,
-                    color: 'var(--text-primary)',
+                    color: "var(--text-primary)",
                   }}
                 >
                   <span
                     style={{
-                      display: 'inline-block',
+                      display: "inline-block",
                       width: 8,
                       height: 8,
-                      borderRadius: '50%',
-                      background: 'var(--accent-flag)',
+                      borderRadius: "50%",
+                      background: "var(--accent-flag)",
                       marginTop: 7,
                       flexShrink: 0,
                     }}
@@ -345,8 +362,8 @@ export default async function ProjectPage({
           <SectionEyebrow id="SEC-P5" label="Challenges & Solutions" />
           <div
             style={{
-              display: 'flex',
-              flexDirection: 'column',
+              display: "flex",
+              flexDirection: "column",
               gap: 20,
               marginTop: 16,
             }}
@@ -355,14 +372,14 @@ export default async function ProjectPage({
               <div
                 key={i}
                 className="card"
-                style={{ padding: 'clamp(20px, 3vw, 32px)' }}
+                style={{ padding: "clamp(20px, 3vw, 32px)" }}
               >
                 <h3
                   style={{
-                    fontFamily: 'var(--font-display), sans-serif',
-                    fontSize: '1.0625rem',
+                    fontFamily: "var(--font-display), sans-serif",
+                    fontSize: "1.0625rem",
                     fontWeight: 600,
-                    color: 'var(--accent-flag)',
+                    color: "var(--accent-flag)",
                     marginBottom: 12,
                   }}
                 >
@@ -370,10 +387,10 @@ export default async function ProjectPage({
                 </h3>
                 <p
                   style={{
-                    fontFamily: 'var(--font-body), sans-serif',
-                    fontSize: '0.9375rem',
+                    fontFamily: "var(--font-body), sans-serif",
+                    fontSize: "0.9375rem",
                     lineHeight: 1.7,
-                    color: 'var(--text-muted)',
+                    color: "var(--text-muted)",
                   }}
                 >
                   {challenge.solution}
@@ -390,11 +407,11 @@ export default async function ProjectPage({
           <SectionEyebrow id="SEC-P6" label="Roadmap" />
           <ul
             style={{
-              listStyle: 'none',
+              listStyle: "none",
               padding: 0,
               marginTop: 16,
-              display: 'flex',
-              flexDirection: 'column',
+              display: "flex",
+              flexDirection: "column",
               gap: 14,
             }}
           >
@@ -402,22 +419,22 @@ export default async function ProjectPage({
               <li
                 key={i}
                 style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
+                  display: "flex",
+                  alignItems: "flex-start",
                   gap: 12,
-                  fontFamily: 'var(--font-body), sans-serif',
-                  fontSize: '0.9375rem',
+                  fontFamily: "var(--font-body), sans-serif",
+                  fontSize: "0.9375rem",
                   lineHeight: 1.6,
-                  color: 'var(--text-muted)',
+                  color: "var(--text-muted)",
                 }}
               >
                 <span
                   style={{
-                    display: 'inline-block',
+                    display: "inline-block",
                     width: 8,
                     height: 8,
-                    borderRadius: '50%',
-                    background: 'var(--accent-verify)',
+                    borderRadius: "50%",
+                    background: "var(--accent-verify)",
                     marginTop: 7,
                     flexShrink: 0,
                   }}
@@ -436,10 +453,10 @@ export default async function ProjectPage({
           <SectionEyebrow id="SEC-P7" label="Deployment" />
           <p
             style={{
-              fontFamily: 'var(--font-body), sans-serif',
-              fontSize: '1rem',
+              fontFamily: "var(--font-body), sans-serif",
+              fontSize: "1rem",
               lineHeight: 1.8,
-              color: 'var(--text-muted)',
+              color: "var(--text-muted)",
               marginTop: 16,
             }}
           >
@@ -452,31 +469,31 @@ export default async function ProjectPage({
             ════════════════════════════════════════════ */}
         <section
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
             gap: 16,
-            paddingTop: 'var(--section-gap)',
-            paddingBottom: 'var(--section-gap)',
-            borderTop: '1px solid var(--border)',
+            paddingTop: "var(--section-gap)",
+            paddingBottom: "var(--section-gap)",
+            borderTop: "1px solid var(--border)",
           }}
         >
           <p
             style={{
-              fontFamily: 'var(--font-display), sans-serif',
-              fontSize: '1.25rem',
+              fontFamily: "var(--font-display), sans-serif",
+              fontSize: "1.25rem",
               fontWeight: 600,
-              color: 'var(--text-primary)',
+              color: "var(--text-primary)",
             }}
           >
             Explore the source
           </p>
           <div
             style={{
-              display: 'flex',
+              display: "flex",
               gap: 12,
-              flexWrap: 'wrap',
-              justifyContent: 'center',
+              flexWrap: "wrap",
+              justifyContent: "center",
             }}
           >
             <a
@@ -484,7 +501,7 @@ export default async function ProjectPage({
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"
-              style={{ fontFamily: 'var(--font-body), sans-serif' }}
+              style={{ fontFamily: "var(--font-body), sans-serif" }}
             >
               GitHub ↗
             </a>
@@ -494,7 +511,7 @@ export default async function ProjectPage({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary"
-                style={{ fontFamily: 'var(--font-body), sans-serif' }}
+                style={{ fontFamily: "var(--font-body), sans-serif" }}
               >
                 Live Demo ↗
               </a>
@@ -503,11 +520,11 @@ export default async function ProjectPage({
           <Link
             href="/projects"
             style={{
-              fontFamily: 'var(--font-mono), monospace',
-              fontSize: '0.8125rem',
-              color: 'var(--text-muted)',
+              fontFamily: "var(--font-mono), monospace",
+              fontSize: "0.8125rem",
+              color: "var(--text-muted)",
               marginTop: 8,
-              transition: 'color var(--transition-base)',
+              transition: "color var(--transition-base)",
             }}
           >
             ← Back to all projects

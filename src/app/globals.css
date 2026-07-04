@@ -7,19 +7,19 @@
 
 :root {
   /* Color Tokens - Modern Zinc & Vibrant Blue/Emerald Theme */
-  --bg-base: #09090B;
-  --bg-surface: #18181B;
-  --border: #27272A;
-  --text-primary: #FAFAFA;
-  --text-muted: #A1A1AA;
-  
-  --accent-flag: #3B82F6; /* Vibrant Bright Blue */
-  --accent-verify: #10B981; /* Vibrant Emerald Green */
+  --bg-base: #09090b;
+  --bg-surface: #18181b;
+  --border: #27272a;
+  --text-primary: #fafafa;
+  --text-muted: #a1a1aa;
+
+  --accent-flag: #3b82f6; /* Vibrant Bright Blue */
+  --accent-verify: #10b981; /* Vibrant Emerald Green */
 
   /* Severity (audit-report semantics) - ZERO ORANGE */
-  --severity-high: #EF4444; /* Red */
-  --severity-medium: #EAB308; /* Yellow */
-  --severity-low: #3B82F6; /* Blue */
+  --severity-high: #ef4444; /* Red */
+  --severity-medium: #eab308; /* Yellow */
+  --severity-low: #3b82f6; /* Blue */
 
   /* Spacing rhythm */
   --section-gap: 96px;
@@ -136,7 +136,9 @@ a {
   background: var(--bg-surface);
   border: 1px solid var(--border);
   border-radius: 8px;
-  transition: border-color var(--transition-base), transform var(--transition-base);
+  transition:
+    border-color var(--transition-base),
+    transform var(--transition-base);
 }
 
 .card:hover {
@@ -147,7 +149,10 @@ a {
 /* ── Project card left accent border ── */
 .card-accent {
   border-left: 3px solid var(--accent-verify);
-  transition: border-left-color var(--transition-base), border-color var(--transition-base), transform var(--transition-base);
+  transition:
+    border-left-color var(--transition-base),
+    border-color var(--transition-base),
+    transform var(--transition-base);
 }
 
 .card-accent:hover {
@@ -180,7 +185,9 @@ a {
   border-radius: 6px;
   border: none;
   cursor: pointer;
-  transition: opacity var(--transition-base), transform var(--transition-base);
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
 }
 
 .btn-primary:hover {
@@ -200,7 +207,10 @@ a {
   border-radius: 6px;
   border: 1px solid var(--border);
   cursor: pointer;
-  transition: border-color var(--transition-base), color var(--transition-base), transform var(--transition-base);
+  transition:
+    border-color var(--transition-base),
+    color var(--transition-base),
+    transform var(--transition-base);
 }
 
 .btn-secondary:hover {

@@ -85,8 +85,7 @@ export const validatedFindings: AuditEntry[] = [
     time: "Jan 2026",
     rank: "213",
     findings: 0,
-    findingSummary:
-      "",
+    findingSummary: "",
     technologies: ["Spot Trading", "Lending", "Accounting"],
     link: "https://github.com/Sourav-IIITBPL/audits/blob/main/competitive-audits/2026-01-flying-tulip-submissions.md",
   },
@@ -249,84 +248,102 @@ export const auditArchive: AuditArchive[] = [
   },
 ];
 
-
 export const securityKnowledge = [
   {
     title: "Reentrancy",
-    description: "Cross-function, cross-contract, read-only reentrancy, and CEI-based mitigation patterns",
+    description:
+      "Cross-function, cross-contract, read-only reentrancy, and CEI-based mitigation patterns",
   },
   {
     title: "Flash Loan Attacks",
-    description: "Atomic capital attacks, state manipulation, and flash loan-assisted exploit chains",
+    description:
+      "Atomic capital attacks, state manipulation, and flash loan-assisted exploit chains",
   },
   {
     title: "Oracle Manipulation",
-    description: "TWAP manipulation, Chainlink staleness, low-liquidity pricing, and multi-oracle validation",
+    description:
+      "TWAP manipulation, Chainlink staleness, low-liquidity pricing, and multi-oracle validation",
   },
   {
     title: "ERC4626 Vault Security",
-    description: "Share inflation, donation attacks, first depositor exploits, and rounding vulnerabilities",
+    description:
+      "Share inflation, donation attacks, first depositor exploits, and rounding vulnerabilities",
   },
   {
     title: "AMM Security",
-    description: "Swap accounting, liquidity invariants, reserve manipulation, and fee calculation correctness",
+    description:
+      "Swap accounting, liquidity invariants, reserve manipulation, and fee calculation correctness",
   },
   {
     title: "Cross-Chain Messaging",
-    description: "LayerZero messaging, replay attacks, endpoint trust assumptions, and state consistency",
+    description:
+      "LayerZero messaging, replay attacks, endpoint trust assumptions, and state consistency",
   },
   {
     title: "Bridge Security",
-    description: "Mint/burn correctness, message verification, relayer assumptions, and bridge accounting",
+    description:
+      "Mint/burn correctness, message verification, relayer assumptions, and bridge accounting",
   },
   {
     title: "Permit & Signature Security",
-    description: "EIP-2612, Permit2, nonce management, replay protection, and signature validation",
+    description:
+      "EIP-2612, Permit2, nonce management, replay protection, and signature validation",
   },
   {
     title: "Access Control",
-    description: "RBAC, Ownable patterns, privilege escalation, initializer protection, and admin safety",
+    description:
+      "RBAC, Ownable patterns, privilege escalation, initializer protection, and admin safety",
   },
   {
     title: "Upgradeable Contracts",
-    description: "UUPS, Transparent proxies, storage layout collisions, initialization, and upgrade safety",
+    description:
+      "UUPS, Transparent proxies, storage layout collisions, initialization, and upgrade safety",
   },
   {
     title: "Precision & Rounding",
-    description: "Fixed-point math, precision loss, truncation bias, dust accumulation, and decimal mismatches",
+    description:
+      "Fixed-point math, precision loss, truncation bias, dust accumulation, and decimal mismatches",
   },
   {
     title: "Integer Arithmetic",
-    description: "Overflow, underflow, unsafe casting, signed/unsigned conversion, and unchecked math",
+    description:
+      "Overflow, underflow, unsafe casting, signed/unsigned conversion, and unchecked math",
   },
   {
     title: "Denial of Service",
-    description: "Gas griefing, revert griefing, unbounded loops, block gas limits, and stuck funds",
+    description:
+      "Gas griefing, revert griefing, unbounded loops, block gas limits, and stuck funds",
   },
   {
     title: "MEV & Front-Running",
-    description: "Sandwich attacks, transaction ordering, commit-reveal schemes, and slippage protection",
+    description:
+      "Sandwich attacks, transaction ordering, commit-reveal schemes, and slippage protection",
   },
   {
     title: "Token Integration",
-    description: "Non-standard ERC20s, fee-on-transfer, rebasing, blacklisting, and callback-enabled tokens",
+    description:
+      "Non-standard ERC20s, fee-on-transfer, rebasing, blacklisting, and callback-enabled tokens",
   },
   {
     title: "External Call Safety",
-    description: "Low-level calls, delegatecall risks, return-value validation, and callback assumptions",
+    description:
+      "Low-level calls, delegatecall risks, return-value validation, and callback assumptions",
   },
   {
     title: "Liquidation Logic",
-    description: "Collateral valuation, health factor calculation, liquidation incentives, and bad debt",
+    description:
+      "Collateral valuation, health factor calculation, liquidation incentives, and bad debt",
   },
   {
     title: "Staking & Reward Systems",
-    description: "Reward accounting, emission schedules, checkpointing, and distribution correctness",
+    description:
+      "Reward accounting, emission schedules, checkpointing, and distribution correctness",
   },
   {
     title: "Invariant Testing",
-    description: "Stateful fuzzing, protocol invariants, differential testing, and adversarial simulation",
-  }
+    description:
+      "Stateful fuzzing, protocol invariants, differential testing, and adversarial simulation",
+  },
 ];
 
 export const methodologySteps = [

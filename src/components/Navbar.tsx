@@ -41,7 +41,9 @@ export default function Navbar() {
         background: scrolled ? "rgba(11, 15, 20, 0.85)" : "transparent",
         backdropFilter: scrolled ? "blur(12px)" : "none",
         WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+        borderBottom: scrolled
+          ? "1px solid var(--border)"
+          : "1px solid transparent",
       }}
     >
       <nav
@@ -101,9 +103,13 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <Link href={contactHref} className="btn-primary" style={{ padding: "8px 20px", fontSize: "0.8125rem" }}>
+          <a
+            href={contactHref}
+            className="btn-primary"
+            style={{ padding: "8px 20px", fontSize: "0.8125rem" }}
+          >
             Contact
-          </Link>
+          </a>
         </div>
 
         {/* Mobile hamburger */}
@@ -158,7 +164,9 @@ export default function Navbar() {
                   fontFamily: "var(--font-display), sans-serif",
                   fontSize: "1.5rem",
                   fontWeight: 600,
-                  color: isActive ? "var(--accent-flag)" : "var(--text-primary)",
+                  color: isActive
+                    ? "var(--accent-flag)"
+                    : "var(--text-primary)",
                   transition: "color 0.2s ease",
                 }}
               >
@@ -166,14 +174,14 @@ export default function Navbar() {
               </Link>
             );
           })}
-          <Link
+          <a
             href={contactHref}
             onClick={() => setMobileOpen(false)}
             className="btn-primary"
             style={{ marginTop: 16 }}
           >
             Contact
-          </Link>
+          </a>
         </div>
       )}
 

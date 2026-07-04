@@ -52,7 +52,8 @@ export default function Footer() {
               lineHeight: 1.6,
             }}
           >
-            Building secure protocol infrastructure and auditing production DeFi systems.
+            Building secure protocol infrastructure and auditing production DeFi
+            systems.
           </p>
         </div>
 
@@ -130,8 +131,18 @@ export default function Footer() {
                   (e.currentTarget.style.color = "var(--text-muted)")
                 }
               >
-                {profile.icon && <profile.icon size={14} style={{ display: 'inline', marginRight: 8, verticalAlign: 'middle', color: 'var(--accent-verify)' }} />}
-                <span style={{ verticalAlign: 'middle' }}>{profile.name}</span>
+                {profile.icon && (
+                  <profile.icon
+                    size={14}
+                    style={{
+                      display: "inline",
+                      marginRight: 8,
+                      verticalAlign: "middle",
+                      color: "var(--accent-verify)",
+                    }}
+                  />
+                )}
+                <span style={{ verticalAlign: "middle" }}>{profile.name}</span>
               </a>
             ))}
           </div>
@@ -171,8 +182,20 @@ export default function Footer() {
                       (e.currentTarget.style.color = "var(--text-muted)")
                     }
                   >
-                    {contact.icon && <contact.icon size={14} style={{ display: 'inline', marginRight: 8, verticalAlign: 'middle', color: 'var(--accent-verify)' }} />}
-                    <span style={{ verticalAlign: 'middle' }}>{contact.value}</span>
+                    {contact.icon && (
+                      <contact.icon
+                        size={14}
+                        style={{
+                          display: "inline",
+                          marginRight: 8,
+                          verticalAlign: "middle",
+                          color: "var(--accent-verify)",
+                        }}
+                      />
+                    )}
+                    <span style={{ verticalAlign: "middle" }}>
+                      {contact.value}
+                    </span>
                   </a>
                 ) : (
                   <span
@@ -181,8 +204,20 @@ export default function Footer() {
                       color: "var(--text-muted)",
                     }}
                   >
-                    {contact.icon && <contact.icon size={14} style={{ display: 'inline', marginRight: 8, verticalAlign: 'middle', color: 'var(--accent-verify)' }} />}
-                    <span style={{ verticalAlign: 'middle' }}>{contact.value}</span>
+                    {contact.icon && (
+                      <contact.icon
+                        size={14}
+                        style={{
+                          display: "inline",
+                          marginRight: 8,
+                          verticalAlign: "middle",
+                          color: "var(--accent-verify)",
+                        }}
+                      />
+                    )}
+                    <span style={{ verticalAlign: "middle" }}>
+                      {contact.value}
+                    </span>
                   </span>
                 )}
               </div>
@@ -211,7 +246,6 @@ export default function Footer() {
           © 2026 Sourav Yadav
         </span>
       </div>
-
     </footer>
   );
 }

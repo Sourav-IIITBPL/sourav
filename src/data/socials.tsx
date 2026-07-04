@@ -1,15 +1,22 @@
-import {SiGithub,SiLeetcode,SiDiscord,SiTelegram,SiX,SiGmail} from "react-icons/si";
+import {
+  SiGithub,
+  SiLeetcode,
+  SiDiscord,
+  SiTelegram,
+  SiX,
+  SiGmail,
+} from "react-icons/si";
 import { MdEmail } from "react-icons/md";
 import { FaLinkedin } from "react-icons/fa";
 
 export const FaviconIcon = (domain: string) => {
   const Icon = (props: any) => (
-    <img 
-      src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`} 
-      width={props.size || 20} 
-      height={props.size || 20} 
-      alt={`${domain} logo`} 
-      style={{ borderRadius: '4px', objectFit: 'contain' }} 
+    <img
+      src={`https://www.google.com/s2/favicons?domain=${domain}&sz=64`}
+      width={props.size || 20}
+      height={props.size || 20}
+      alt={`${domain} logo`}
+      style={{ borderRadius: "4px", objectFit: "contain" }}
     />
   );
   Icon.displayName = `FaviconIcon_${domain}`;

@@ -22,7 +22,19 @@ const platformColor: Record<string, string> = {
 };
 
 /* ── Category pills for hero ── */
-const categories = ["AMMs", "Vaults", "Lending", "Cross-Chain", "DEX"];
+const categories = [
+  "AMMs",
+  "Vaults",
+  "Lending",
+  "Cross-Chain",
+  "DEX",
+  "Smart Contracts",
+  "Access Control",
+  "Protocol Accounting",
+  "Logic Flaws",
+  "Tokenomics",
+  "Staking",
+];
 
 export default function SecurityResearchPage() {
   return (
@@ -47,45 +59,178 @@ export default function SecurityResearchPage() {
           Security Research
         </h1>
 
-        {/* Big stat */}
+        {/* Stats Flex Layout */}
         <div
           style={{
             display: "flex",
-            alignItems: "baseline",
-            gap: 10,
+            flexWrap: "wrap",
+            gap: "64px",
             marginBottom: 32,
           }}
         >
-          <span
-            className="stat-number"
-            style={{
-              fontFamily: "var(--font-display), sans-serif",
-              fontSize: "clamp(3rem, 7vw, 5rem)",
-              fontWeight: 800,
-              color: "var(--accent-flag)",
-              lineHeight: 1,
-            }}
-          >
-            20+
-          </span>
-          <span
-            style={{
-              fontFamily: "var(--font-body), sans-serif",
-              fontSize: "1.1rem",
-              color: "var(--text-muted)",
-            }}
-          >
-            Protocols Audited
-          </span>
-        </div>
+          {/* Left Stat: Protocols */}
+          <div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: 10,
+                marginBottom: 16,
+              }}
+            >
+              <span
+                className="stat-number"
+                style={{
+                  fontFamily: "var(--font-display), sans-serif",
+                  fontSize: "clamp(3rem, 7vw, 5rem)",
+                  fontWeight: 800,
+                  color: "var(--accent-flag)",
+                  lineHeight: 1,
+                }}
+              >
+                21
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-body), sans-serif",
+                  fontSize: "1.1rem",
+                  color: "var(--text-muted)",
+                }}
+              >
+                Protocols Audited
+              </span>
+            </div>
+            {/* Category pills */}
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 10,
+                maxWidth: 500,
+              }}
+            >
+              {categories.map((cat) => (
+                <span className="badge" key={cat}>
+                  {cat}
+                </span>
+              ))}
+            </div>
+          </div>
 
-        {/* Category pills */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-          {categories.map((cat) => (
-            <span className="badge" key={cat}>
-              {cat}
-            </span>
-          ))}
+          {/* Right Stat: Findings */}
+          <div>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "baseline",
+                gap: 10,
+                marginBottom: 16,
+              }}
+            >
+              <span
+                className="stat-number"
+                style={{
+                  fontFamily: "var(--font-display), sans-serif",
+                  fontSize: "clamp(3rem, 7vw, 5rem)",
+                  fontWeight: 800,
+                  color: "var(--accent-verify)",
+                  lineHeight: 1,
+                }}
+              >
+                11
+              </span>
+              <span
+                style={{
+                  fontFamily: "var(--font-body), sans-serif",
+                  fontSize: "1.1rem",
+                  color: "var(--text-muted)",
+                }}
+              >
+                Validated Findings
+              </span>
+            </div>
+            {/* Findings breakdown */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+              <div
+                className="card"
+                style={{
+                  padding: "12px 20px",
+                  textAlign: "center",
+                  borderColor: "rgba(239,68,68,0.3)",
+                  background: "rgba(239,68,68,0.05)",
+                }}
+              >
+                <span
+                  style={{
+                    display: "block",
+                    fontSize: "1.5rem",
+                    fontWeight: 700,
+                    color: "#ef4444",
+                    fontFamily: "var(--font-display), sans-serif",
+                  }}
+                >
+                  2
+                </span>
+                <span
+                  style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}
+                >
+                  High
+                </span>
+              </div>
+              <div
+                className="card"
+                style={{
+                  padding: "12px 20px",
+                  textAlign: "center",
+                  borderColor: "rgba(245,158,11,0.3)",
+                  background: "rgba(245,158,11,0.05)",
+                }}
+              >
+                <span
+                  style={{
+                    display: "block",
+                    fontSize: "1.5rem",
+                    fontWeight: 700,
+                    color: "#f59e0b",
+                    fontFamily: "var(--font-display), sans-serif",
+                  }}
+                >
+                  3
+                </span>
+                <span
+                  style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}
+                >
+                  Medium
+                </span>
+              </div>
+              <div
+                className="card"
+                style={{
+                  padding: "12px 20px",
+                  textAlign: "center",
+                  borderColor: "rgba(139,152,165,0.3)",
+                  background: "rgba(139,152,165,0.05)",
+                }}
+              >
+                <span
+                  style={{
+                    display: "block",
+                    fontSize: "1.5rem",
+                    fontWeight: 700,
+                    color: "var(--text-muted)",
+                    fontFamily: "var(--font-display), sans-serif",
+                  }}
+                >
+                  6
+                </span>
+                <span
+                  style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}
+                >
+                  Low
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -110,16 +255,13 @@ export default function SecurityResearchPage() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
+            gridTemplateColumns:
+              "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
             gap: 20,
           }}
         >
           {validatedFindings.map((f, i) => (
-            <div
-              key={i}
-              className="card"
-              style={{ padding: "28px 28px 24px" }}
-            >
+            <div key={i} className="card" style={{ padding: "28px 28px 24px" }}>
               {/* Header row */}
               <div
                 style={{
@@ -151,14 +293,63 @@ export default function SecurityResearchPage() {
               </div>
 
               {/* Metadata tags */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 14 }}>
-                <span className="badge" style={{ fontSize: "0.7rem", color: 'var(--text-primary)' }}>{f.category}</span>
-                {f.severity && f.severity.filter(Boolean).map(s => (
-                  <span key={s} className="badge" style={{ fontSize: "0.7rem", borderColor: s === 'High' ? 'rgba(239,68,68,0.3)' : 'var(--border)', color: s === 'High' ? '#ef4444' : s === 'Medium' ? '#f59e0b' : 'var(--text-muted)' }}>{s}</span>
-                ))}
-                {f.time && <span className="badge" style={{ fontSize: "0.7rem" }}>{f.time}</span>}
-                {f.rank && <span className="badge" style={{ fontSize: "0.7rem", color: 'var(--accent-verify)' }}>Rank {f.rank}</span>}
-                {f.findings !== undefined && <span className="badge" style={{ fontSize: "0.7rem" }}>{f.findings} Findings</span>}
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 6,
+                  marginBottom: 14,
+                }}
+              >
+                <span
+                  className="badge"
+                  style={{ fontSize: "0.7rem", color: "var(--text-primary)" }}
+                >
+                  {f.category}
+                </span>
+                {f.severity &&
+                  f.severity.filter(Boolean).map((s) => (
+                    <span
+                      key={s}
+                      className="badge"
+                      style={{
+                        fontSize: "0.7rem",
+                        borderColor:
+                          s === "High"
+                            ? "rgba(239,68,68,0.3)"
+                            : "var(--border)",
+                        color:
+                          s === "High"
+                            ? "#ef4444"
+                            : s === "Medium"
+                              ? "#f59e0b"
+                              : "var(--text-muted)",
+                      }}
+                    >
+                      {s}
+                    </span>
+                  ))}
+                {f.time && (
+                  <span className="badge" style={{ fontSize: "0.7rem" }}>
+                    {f.time}
+                  </span>
+                )}
+                {f.rank && (
+                  <span
+                    className="badge"
+                    style={{
+                      fontSize: "0.7rem",
+                      color: "var(--accent-verify)",
+                    }}
+                  >
+                    Rank {f.rank}
+                  </span>
+                )}
+                {f.findings !== undefined && (
+                  <span className="badge" style={{ fontSize: "0.7rem" }}>
+                    {f.findings} Findings
+                  </span>
+                )}
               </div>
 
               {/* Summary */}
@@ -178,9 +369,25 @@ export default function SecurityResearchPage() {
 
               {/* Technologies */}
               {f.technologies && f.technologies.length > 0 && (
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 18 }}>
-                  {f.technologies.map(tech => (
-                    <span key={tech} className="badge" style={{ fontSize: "0.7rem", fontFamily: 'var(--font-mono), monospace' }}>{tech}</span>
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 6,
+                    marginBottom: 18,
+                  }}
+                >
+                  {f.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="badge"
+                      style={{
+                        fontSize: "0.7rem",
+                        fontFamily: "var(--font-mono), monospace",
+                      }}
+                    >
+                      {tech}
+                    </span>
                   ))}
                 </div>
               )}
@@ -420,11 +627,7 @@ export default function SecurityResearchPage() {
 
         <div className="knowledge-grid">
           {securityKnowledge.map((item, i) => (
-            <div
-              key={i}
-              className="card"
-              style={{ padding: "24px 24px 22px" }}
-            >
+            <div key={i} className="card" style={{ padding: "24px 24px 22px" }}>
               <h3
                 style={{
                   fontFamily: "var(--font-display), sans-serif",
@@ -451,8 +654,6 @@ export default function SecurityResearchPage() {
           ))}
         </div>
       </section>
-
-
 
       {/* ═══════════════════════════════════════════════
           AUDIT ARCHIVE
@@ -548,8 +749,7 @@ export default function SecurityResearchPage() {
                       style={{
                         borderColor:
                           platformColor[a.platform] ?? "var(--border)",
-                        color:
-                          platformColor[a.platform] ?? "var(--text-muted)",
+                        color: platformColor[a.platform] ?? "var(--text-muted)",
                       }}
                     >
                       {a.platform}
@@ -580,11 +780,7 @@ export default function SecurityResearchPage() {
         {/* Mobile cards */}
         <div className="archive-cards" style={{ display: "none" }}>
           {auditArchive.map((a, i) => (
-            <div
-              key={i}
-              className="card"
-              style={{ padding: "20px 20px 18px" }}
-            >
+            <div key={i} className="card" style={{ padding: "20px 20px 18px" }}>
               <div
                 style={{
                   display: "flex",
@@ -606,10 +802,8 @@ export default function SecurityResearchPage() {
                 <span
                   className="badge"
                   style={{
-                    borderColor:
-                      platformColor[a.platform] ?? "var(--border)",
-                    color:
-                      platformColor[a.platform] ?? "var(--text-muted)",
+                    borderColor: platformColor[a.platform] ?? "var(--border)",
+                    color: platformColor[a.platform] ?? "var(--text-muted)",
                   }}
                 >
                   {a.platform}
