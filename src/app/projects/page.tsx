@@ -24,17 +24,56 @@ export default function ProjectsPage() {
     <main style={{ paddingTop: 120 }}>
       <div className="container-main">
         {/* ── Page Header ── */}
-        <h1
+        <div
           style={{
-            fontFamily: "var(--font-display), sans-serif",
-            fontSize: "clamp(2rem, 5vw, 3rem)",
-            fontWeight: 700,
-            color: "var(--text-primary)",
-            marginBottom: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            gap: 16,
+            marginBottom: 64,
           }}
         >
-          Projects
-        </h1>
+          <span
+            style={{
+              fontFamily: "var(--font-mono), monospace",
+              fontSize: "0.75rem",
+              fontWeight: 500,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: "var(--accent-flag)",
+              background: "var(--accent-flag-soft)",
+              padding: "6px 16px",
+              borderRadius: "var(--radius-full)",
+            }}
+          >
+            Portfolio
+          </span>
+          <h1
+            style={{
+              fontFamily: "var(--font-display), sans-serif",
+              fontSize: "clamp(2rem, 5vw, 3rem)",
+              fontWeight: 700,
+              color: "var(--text-primary)",
+              marginBottom: 0,
+              lineHeight: 1.15,
+            }}
+          >
+            Projects
+          </h1>
+          <p
+            style={{
+              fontFamily: "var(--font-body), sans-serif",
+              fontSize: "1.0625rem",
+              lineHeight: 1.7,
+              color: "var(--text-secondary)",
+              maxWidth: 560,
+            }}
+          >
+            A curated collection of projects spanning smart contract
+            infrastructure, DeFi protocols, and developer tooling.
+          </p>
+        </div>
 
         <SectionEyebrow id="SEC-P0" label="All Projects" />
 
@@ -43,16 +82,37 @@ export default function ProjectsPage() {
           style={{
             display: "flex",
             flexDirection: "column",
-            gap: 40,
-            marginTop: 48,
+            gap: 32,
+            marginTop: 40,
           }}
         >
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <article
               key={project.slug}
-              className="card card-accent"
-              style={{ padding: "clamp(24px, 4vw, 48px)" }}
+              style={{
+                position: "relative",
+                padding: "clamp(28px, 4vw, 48px)",
+                background: "var(--bg-surface)",
+                border: "1px solid var(--border)",
+                borderRadius: "var(--radius-lg)",
+                transition: "border-color 0.3s ease, box-shadow 0.3s ease",
+                overflow: "hidden",
+              }}
             >
+              {/* Subtle top accent line */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 2,
+                  background: "var(--gradient-accent)",
+                  opacity: 0.6,
+                }}
+                aria-hidden="true"
+              />
+
               <div
                 style={{
                   display: "flex",
@@ -65,27 +125,44 @@ export default function ProjectsPage() {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    gap: 24,
+                    gap: 20,
                     flexWrap: "wrap",
                   }}
                 >
+                  {/* Project number badge */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: "clamp(20px, 3vw, 32px)",
+                      right: "clamp(20px, 3vw, 32px)",
+                      fontFamily: "var(--font-mono), monospace",
+                      fontSize: "0.75rem",
+                      fontWeight: 500,
+                      color: "var(--text-muted)",
+                      opacity: 0.5,
+                    }}
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </div>
+
                   {project.logo ? (
                     <div
                       style={{
-                        width: 120,
-                        height: 120,
-                        borderRadius: 12,
+                        width: 80,
+                        height: 80,
+                        borderRadius: "var(--radius-md)",
                         overflow: "hidden",
                         flexShrink: 0,
-                        background: "var(--bg-surface)",
+                        background: "var(--bg-base)",
                         border: "1px solid var(--border)",
+                        boxShadow: "var(--shadow-sm)",
                       }}
                     >
                       <Image
                         src={project.logo}
                         alt={`${project.name} logo`}
-                        width={120}
-                        height={120}
+                        width={80}
+                        height={80}
                         style={{
                           objectFit: "cover",
                           width: "100%",
@@ -97,16 +174,20 @@ export default function ProjectsPage() {
                     <div
                       className="image-placeholder"
                       style={{
-                        width: 120,
-                        height: 120,
-                        borderRadius: 12,
+                        width: 80,
+                        height: 80,
+                        borderRadius: "var(--radius-md)",
                         flexShrink: 0,
-                        fontSize: "1.75rem",
+                        fontSize: "1.375rem",
                         fontWeight: 700,
                         fontFamily: "var(--font-display), sans-serif",
                         color: "var(--accent-flag)",
-                        background: "var(--bg-surface)",
-                        border: "1px dashed var(--border)",
+                        background:
+                          "linear-gradient(135deg, var(--accent-flag-soft) 0%, transparent 100%)",
+                        border: "1px solid rgba(99,102,241,0.15)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
                       {getInitials(project.name)}
@@ -120,7 +201,8 @@ export default function ProjectsPage() {
                         fontSize: "clamp(1.25rem, 3vw, 1.75rem)",
                         fontWeight: 700,
                         color: "var(--text-primary)",
-                        marginBottom: 4,
+                        marginBottom: 6,
+                        lineHeight: 1.2,
                       }}
                     >
                       {project.name}
@@ -128,9 +210,10 @@ export default function ProjectsPage() {
                     <p
                       style={{
                         fontFamily: "var(--font-body), sans-serif",
-                        fontSize: "1rem",
+                        fontSize: "0.9375rem",
                         color: "var(--accent-verify)",
                         fontWeight: 500,
+                        lineHeight: 1.4,
                       }}
                     >
                       {project.tagline}
@@ -143,8 +226,8 @@ export default function ProjectsPage() {
                   style={{
                     fontFamily: "var(--font-body), sans-serif",
                     fontSize: "0.9375rem",
-                    lineHeight: 1.7,
-                    color: "var(--text-muted)",
+                    lineHeight: 1.75,
+                    color: "var(--text-secondary)",
                     maxWidth: 800,
                   }}
                 >
@@ -152,20 +235,28 @@ export default function ProjectsPage() {
                 </p>
 
                 {/* Problem */}
-                <p
+                <div
                   style={{
-                    fontFamily: "var(--font-body), sans-serif",
-                    fontSize: "0.875rem",
-                    lineHeight: 1.6,
-                    color: "var(--text-muted)",
-                    fontStyle: "italic",
-                    paddingLeft: 16,
+                    paddingLeft: 20,
                     borderLeft: "2px solid var(--accent-flag)",
-                    opacity: 0.85,
+                    background: "var(--accent-flag-soft)",
+                    borderRadius: "0 var(--radius-sm) var(--radius-sm) 0",
+                    padding: "16px 20px",
                   }}
                 >
-                  {project.problem}
-                </p>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-body), sans-serif",
+                      fontSize: "0.875rem",
+                      lineHeight: 1.7,
+                      color: "var(--text-secondary)",
+                      fontStyle: "italic",
+                      margin: 0,
+                    }}
+                  >
+                    {project.problem}
+                  </p>
+                </div>
 
                 {/* Tech Stack Badges */}
                 <div
@@ -178,9 +269,16 @@ export default function ProjectsPage() {
                   {project.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="badge"
                       style={{
                         fontFamily: "var(--font-mono), monospace",
+                        fontSize: "0.75rem",
+                        fontWeight: 500,
+                        padding: "5px 14px",
+                        borderRadius: "var(--radius-full)",
+                        background: "rgba(255,255,255,0.04)",
+                        border: "1px solid var(--border)",
+                        color: "var(--text-secondary)",
+                        letterSpacing: "0.02em",
                       }}
                     >
                       {tech}
@@ -189,13 +287,22 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* CTA */}
-                <div style={{ paddingTop: 8 }}>
+                <div
+                  style={{
+                    paddingTop: 8,
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
                   <Link
                     href={`/projects/${project.slug}`}
                     className="btn-primary"
                     style={{
                       fontFamily: "var(--font-body), sans-serif",
                       textDecoration: "none",
+                      fontSize: "0.875rem",
+                      fontWeight: 600,
+                      letterSpacing: "0.01em",
                     }}
                   >
                     Explore Project →

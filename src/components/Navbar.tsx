@@ -18,7 +18,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -37,12 +37,12 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 100,
-        transition: "background 0.3s ease, border-color 0.3s ease",
-        background: scrolled ? "rgba(11, 15, 20, 0.85)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
+        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        background: scrolled ? "rgba(5, 5, 5, 0.8)" : "transparent",
+        backdropFilter: scrolled ? "blur(20px) saturate(1.4)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(20px) saturate(1.4)" : "none",
         borderBottom: scrolled
-          ? "1px solid var(--border)"
+          ? "1px solid rgba(255,255,255,0.06)"
           : "1px solid transparent",
       }}
     >
@@ -59,14 +59,35 @@ export default function Navbar() {
         <Link
           href="/"
           style={{
-            fontFamily: "var(--font-mono), monospace",
-            fontSize: "1.125rem",
-            fontWeight: 600,
+            fontFamily: "var(--font-display), sans-serif",
+            fontSize: "1rem",
+            fontWeight: 700,
             color: "var(--text-primary)",
-            letterSpacing: "0.05em",
+            letterSpacing: "0.08em",
+            padding: "6px 0",
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
           }}
         >
-          SY
+          <span
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 28,
+              height: 28,
+              borderRadius: "var(--radius-sm)",
+              background: "var(--gradient-accent)",
+              fontSize: "0.75rem",
+              fontWeight: 700,
+              color: "white",
+              letterSpacing: 0,
+            }}
+          >
+            S
+          </span>
+          <span style={{ opacity: 0.5, fontWeight: 400 }}>ourav</span>
         </Link>
 
         {/* Desktop nav */}
@@ -74,39 +95,58 @@ export default function Navbar() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 32,
+            gap: 6,
           }}
           className="desktop-nav"
         >
-          {navLinks.map((link) => {
-            const isActive =
-              link.href === "/"
-                ? pathname === "/"
-                : pathname.startsWith(link.href);
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                style={{
-                  fontFamily: "var(--font-body), sans-serif",
-                  fontSize: "0.875rem",
-                  fontWeight: 500,
-                  color: isActive ? "var(--accent-flag)" : "var(--text-muted)",
-                  transition: "color 0.2s ease",
-                  borderBottom: isActive
-                    ? "2px solid var(--accent-flag)"
-                    : "2px solid transparent",
-                  paddingBottom: 4,
-                }}
-              >
-                {link.label}
-              </Link>
-            );
-          })}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              background: "rgba(255,255,255,0.03)",
+              borderRadius: "var(--radius-sm)",
+              padding: "3px",
+              border: "1px solid var(--border)",
+            }}
+          >
+            {navLinks.map((link) => {
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  style={{
+                    fontFamily: "var(--font-body), sans-serif",
+                    fontSize: "0.8125rem",
+                    fontWeight: 500,
+                    color: isActive
+                      ? "var(--text-primary)"
+                      : "var(--text-muted)",
+                    padding: "6px 14px",
+                    borderRadius: "6px",
+                    background: isActive
+                      ? "rgba(255,255,255,0.06)"
+                      : "transparent",
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </div>
           <a
             href={contactHref}
             className="btn-primary"
-            style={{ padding: "8px 20px", fontSize: "0.8125rem" }}
+            style={{
+              padding: "7px 18px",
+              fontSize: "0.8125rem",
+              marginLeft: 8,
+            }}
           >
             Contact
           </a>
@@ -120,13 +160,14 @@ export default function Navbar() {
           style={{
             display: "none",
             background: "none",
-            border: "none",
+            border: "1px solid var(--border)",
+            borderRadius: "var(--radius-sm)",
             color: "var(--text-primary)",
             cursor: "pointer",
-            padding: 8,
+            padding: 7,
           }}
         >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
 
@@ -140,13 +181,13 @@ export default function Navbar() {
             left: 0,
             right: 0,
             bottom: 0,
-            background: "rgba(11, 15, 20, 0.97)",
-            backdropFilter: "blur(16px)",
+            background: "rgba(5, 5, 5, 0.96)",
+            backdropFilter: "blur(24px)",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            gap: 32,
+            gap: 28,
             zIndex: 99,
           }}
         >
@@ -164,10 +205,13 @@ export default function Navbar() {
                   fontFamily: "var(--font-display), sans-serif",
                   fontSize: "1.5rem",
                   fontWeight: 600,
-                  color: isActive
-                    ? "var(--accent-flag)"
-                    : "var(--text-primary)",
+                  color: isActive ? "var(--text-primary)" : "var(--text-muted)",
                   transition: "color 0.2s ease",
+                  padding: "8px 24px",
+                  borderRadius: "var(--radius-sm)",
+                  background: isActive
+                    ? "var(--accent-flag-soft)"
+                    : "transparent",
                 }}
               >
                 {link.label}
@@ -178,7 +222,7 @@ export default function Navbar() {
             href={contactHref}
             onClick={() => setMobileOpen(false)}
             className="btn-primary"
-            style={{ marginTop: 16 }}
+            style={{ marginTop: 12, padding: "12px 32px" }}
           >
             Contact
           </a>
@@ -191,7 +235,7 @@ export default function Navbar() {
             display: none !important;
           }
           .mobile-menu-btn {
-            display: block !important;
+            display: flex !important;
           }
         }
       `}</style>

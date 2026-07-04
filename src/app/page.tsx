@@ -120,25 +120,38 @@ function StatCard({
       className="card"
       variants={scaleIn}
       style={{
-        padding: isLarge ? "32px" : "24px",
+        padding: isLarge ? "36px 32px" : "28px 24px",
         gridColumn: isLarge ? "span 2" : "span 1",
         display: "flex",
         flexDirection: "column",
-        gap: "8px",
+        gap: "10px",
         position: "relative",
         overflow: "hidden",
+        borderColor: "rgba(99, 102, 241, 0.08)",
       }}
     >
-      {/* Subtle glow */}
+      {/* Gradient accent bar at top */}
       <div
         style={{
           position: "absolute",
-          top: "-50%",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "2px",
+          background: "var(--gradient-accent)",
+          opacity: 0.6,
+        }}
+      />
+      {/* Subtle radial glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-60%",
           right: "-30%",
-          width: "200px",
-          height: "200px",
+          width: "220px",
+          height: "220px",
           background:
-            "radial-gradient(circle, rgba(59,130,246,0.04) 0%, transparent 70%)",
+            "radial-gradient(circle, rgba(99,102,241,0.06) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
@@ -146,9 +159,12 @@ function StatCard({
         className="stat-number"
         style={{
           fontFamily: "var(--font-mono), monospace",
-          fontSize: isLarge ? "3rem" : "2.25rem",
-          fontWeight: 600,
-          color: "var(--accent-flag)",
+          fontSize: isLarge ? "3.25rem" : "2.5rem",
+          fontWeight: 700,
+          background: "var(--gradient-accent)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          backgroundClip: "text",
           lineHeight: 1.1,
         }}
       >
@@ -158,7 +174,7 @@ function StatCard({
         style={{
           fontFamily: "var(--font-body), sans-serif",
           fontSize: "0.875rem",
-          color: "var(--text-muted)",
+          color: "var(--text-secondary)",
           letterSpacing: "0.02em",
         }}
       >
@@ -183,16 +199,19 @@ function CopyButton({ text }: { text: string }) {
     <button
       onClick={handleCopy}
       style={{
-        background: "none",
-        border: "1px solid var(--border)",
-        borderRadius: "4px",
-        padding: "4px 8px",
+        background: copied
+          ? "rgba(34, 197, 94, 0.08)"
+          : "rgba(99, 102, 241, 0.06)",
+        border: `1px solid ${copied ? "rgba(34, 197, 94, 0.2)" : "var(--border)"}`,
+        borderRadius: "var(--radius-sm)",
+        padding: "6px 12px",
         cursor: "pointer",
-        color: copied ? "var(--accent-verify)" : "var(--text-muted)",
+        color: copied ? "var(--accent-verify)" : "var(--text-secondary)",
         display: "inline-flex",
         alignItems: "center",
-        gap: "4px",
+        gap: "6px",
         fontSize: "0.75rem",
+        fontWeight: 500,
         transition: "all var(--transition-base)",
       }}
       aria-label={`Copy ${text}`}
@@ -255,14 +274,36 @@ export default function HomePage() {
           ═══════════════════════════════════════════ */}
       <section
         className="section-spacing container-main"
-        style={{ paddingTop: "120px" }}
+        style={{
+          paddingTop: "120px",
+          position: "relative",
+          overflow: "visible",
+        }}
       >
+        {/* Hero background radial glow */}
+        <div
+          style={{
+            position: "absolute",
+            top: "-10%",
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "900px",
+            height: "700px",
+            background:
+              "radial-gradient(ellipse at center, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.04) 35%, transparent 70%)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+
         <div
           style={{
             display: "flex",
             alignItems: "center",
             gap: "64px",
             flexWrap: "wrap",
+            position: "relative",
+            zIndex: 1,
           }}
         >
           {/* Left */}
@@ -278,11 +319,12 @@ export default function HomePage() {
               custom={0}
               style={{
                 fontFamily: "var(--font-display), sans-serif",
-                fontSize: "clamp(2.25rem, 5vw, 3.5rem)",
-                fontWeight: 700,
+                fontSize: "clamp(2.5rem, 5.5vw, 4rem)",
+                fontWeight: 800,
                 color: "var(--text-primary)",
-                lineHeight: 1.15,
-                marginBottom: "16px",
+                lineHeight: 1.1,
+                marginBottom: "20px",
+                letterSpacing: "-0.02em",
               }}
             >
               Sourav Yadav
@@ -292,7 +334,7 @@ export default function HomePage() {
             <motion.div
               variants={fadeUp}
               custom={1}
-              style={{ marginBottom: "20px" }}
+              style={{ marginBottom: "24px" }}
             >
               <h2
                 style={{
@@ -305,11 +347,23 @@ export default function HomePage() {
                 }}
               >
                 Protocol Engineer{" "}
-                <span style={{ color: "var(--text-muted)", margin: "0 8px" }}>
+                <span
+                  style={{
+                    color: "var(--text-muted)",
+                    margin: "0 8px",
+                    opacity: 0.5,
+                  }}
+                >
                   •
                 </span>{" "}
                 Smart Contract Security Researcher{" "}
-                <span style={{ color: "var(--text-muted)", margin: "0 8px" }}>
+                <span
+                  style={{
+                    color: "var(--text-muted)",
+                    margin: "0 8px",
+                    opacity: 0.5,
+                  }}
+                >
                   •
                 </span>{" "}
                 Web3 Full-Stack Engineer
@@ -321,11 +375,11 @@ export default function HomePage() {
               variants={fadeUp}
               custom={2}
               style={{
-                fontSize: "1.0625rem",
-                lineHeight: 1.7,
-                color: "var(--text-muted)",
-                maxWidth: "540px",
-                marginBottom: "32px",
+                fontSize: "1.125rem",
+                lineHeight: 1.75,
+                color: "var(--text-secondary)",
+                maxWidth: "560px",
+                marginBottom: "36px",
               }}
             >
               Building secure protocol infrastructure, auditing production DeFi
@@ -360,7 +414,7 @@ export default function HomePage() {
             </motion.div>
           </motion.div>
 
-          {/* Right — Profile photo */}
+          {/* Right — Profile photo with gradient border ring */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, x: 40 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -378,28 +432,38 @@ export default function HomePage() {
             <div
               style={{
                 position: "absolute",
-                inset: "-20px",
+                inset: "-30px",
                 background:
-                  "radial-gradient(circle at center, rgba(16,185,129,0.12) 0%, rgba(59,130,246,0.06) 50%, transparent 70%)",
-                borderRadius: "20px",
-                filter: "blur(30px)",
+                  "radial-gradient(circle at center, rgba(99,102,241,0.15) 0%, rgba(139,92,246,0.08) 40%, transparent 70%)",
+                borderRadius: "24px",
+                filter: "blur(40px)",
                 pointerEvents: "none",
               }}
             />
-            <Image
-              src="/images/my-photo.png"
-              alt="Sourav Yadav"
-              width={320}
-              height={320}
-              priority
+            {/* Gradient border ring */}
+            <div
               style={{
-                borderRadius: "12px",
-                objectFit: "cover",
-                border: "1px solid var(--border)",
                 position: "relative",
+                padding: "3px",
+                borderRadius: "var(--radius-lg)",
+                background: "var(--gradient-accent)",
                 zIndex: 1,
               }}
-            />
+            >
+              <Image
+                src="/images/my-photo.png"
+                alt="Sourav Yadav"
+                width={320}
+                height={320}
+                priority
+                style={{
+                  borderRadius: "13px",
+                  objectFit: "cover",
+                  display: "block",
+                  background: "var(--bg-base)",
+                }}
+              />
+            </div>
           </motion.div>
         </div>
       </section>
@@ -418,10 +482,10 @@ export default function HomePage() {
           <p
             style={{
               maxWidth: "800px",
-              fontSize: "1.0625rem",
-              lineHeight: 1.8,
-              color: "var(--text-muted)",
-              marginBottom: "16px",
+              fontSize: "1.125rem",
+              lineHeight: 1.85,
+              color: "var(--text-secondary)",
+              marginBottom: "20px",
             }}
           >
             I&apos;m a Protocol Engineer, Smart Contract Security Researcher,
@@ -440,9 +504,10 @@ export default function HomePage() {
           <p
             style={{
               maxWidth: "800px",
-              fontSize: "1.0625rem",
-              lineHeight: 1.8,
-              color: "var(--text-muted)",
+              fontSize: "1.125rem",
+              lineHeight: 1.85,
+              color: "var(--text-secondary)",
+              marginBottom: "20px",
             }}
           >
             Beyond security research, I enjoy designing and building
@@ -463,9 +528,9 @@ export default function HomePage() {
           <p
             style={{
               maxWidth: "800px",
-              fontSize: "1.0625rem",
-              lineHeight: 1.8,
-              color: "var(--text-muted)",
+              fontSize: "1.125rem",
+              lineHeight: 1.85,
+              color: "var(--text-secondary)",
             }}
           >
             I&apos;m currently pursuing my B.Tech in Electronics & Communication
@@ -488,7 +553,7 @@ export default function HomePage() {
           variants={staggerContainer}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(210px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
             gap: "16px",
           }}
         >
@@ -507,24 +572,39 @@ export default function HomePage() {
                   padding: "24px",
                   display: "flex",
                   flexDirection: "column",
-                  gap: "12px",
+                  gap: "14px",
                   textDecoration: "none",
                   cursor: "pointer",
+                  position: "relative",
+                  overflow: "hidden",
                 }}
               >
+                {/* Subtle top accent line */}
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: "12px" }}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: "1px",
+                    background:
+                      "linear-gradient(90deg, transparent, rgba(99,102,241,0.3), transparent)",
+                  }}
+                />
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "14px" }}
                 >
                   <div
                     style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "8px",
-                      background: "rgba(59,130,246,0.08)",
+                      width: "42px",
+                      height: "42px",
+                      borderRadius: "var(--radius-md)",
+                      background: "var(--accent-flag-soft)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      border: "1px solid rgba(59,130,246,0.15)",
+                      border: "1px solid rgba(99,102,241,0.15)",
+                      flexShrink: 0,
                     }}
                   >
                     <IconComponent
@@ -560,6 +640,7 @@ export default function HomePage() {
                       fontSize: "0.8125rem",
                       color: "var(--accent-verify)",
                       fontFamily: "var(--font-mono), monospace",
+                      fontWeight: 500,
                     }}
                   >
                     {profile.stat}
@@ -569,10 +650,11 @@ export default function HomePage() {
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "4px",
+                    gap: "6px",
                     fontSize: "0.75rem",
                     color: "var(--text-muted)",
                     marginTop: "auto",
+                    transition: "color var(--transition-fast)",
                   }}
                 >
                   Visit Profile <ExternalLink size={11} />
@@ -618,7 +700,7 @@ export default function HomePage() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
           variants={staggerContainer}
-          style={{ display: "flex", flexDirection: "column", gap: "32px" }}
+          style={{ display: "flex", flexDirection: "column", gap: "28px" }}
         >
           {projects.map((project, idx) => (
             <motion.div
@@ -630,16 +712,31 @@ export default function HomePage() {
                 display: "flex",
                 flexDirection: idx % 2 === 0 ? "row" : "row-reverse",
                 flexWrap: "wrap",
-                gap: "32px",
-                padding: "32px",
+                gap: "36px",
+                padding: "36px",
                 alignItems: "flex-start",
+                position: "relative",
+                overflow: "hidden",
               }}
             >
+              {/* Subtle gradient accent at top */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: "1px",
+                  background:
+                    "linear-gradient(90deg, transparent, rgba(99,102,241,0.25), rgba(139,92,246,0.15), transparent)",
+                }}
+              />
+
               {/* Logo / Placeholder */}
               <div
                 style={{
-                  flex: "0 0 100px",
-                  height: "100px",
+                  flex: "0 0 110px",
+                  height: "110px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -652,10 +749,10 @@ export default function HomePage() {
                     width={100}
                     height={100}
                     style={{
-                      borderRadius: "12px",
+                      borderRadius: "var(--radius-md)",
                       objectFit: "contain",
                       background: "var(--bg-base)",
-                      padding: "8px",
+                      padding: "10px",
                       border: "1px solid var(--border)",
                     }}
                   />
@@ -686,9 +783,10 @@ export default function HomePage() {
                   style={{
                     fontFamily: "var(--font-display), sans-serif",
                     fontSize: "1.5rem",
-                    fontWeight: 600,
+                    fontWeight: 700,
                     color: "var(--text-primary)",
-                    marginBottom: "4px",
+                    marginBottom: "6px",
+                    letterSpacing: "-0.01em",
                   }}
                 >
                   {project.name}
@@ -698,7 +796,8 @@ export default function HomePage() {
                     fontFamily: "var(--font-mono), monospace",
                     fontSize: "0.8125rem",
                     color: "var(--accent-verify)",
-                    marginBottom: "12px",
+                    marginBottom: "14px",
+                    fontWeight: 500,
                   }}
                 >
                   {project.tagline}
@@ -706,9 +805,9 @@ export default function HomePage() {
                 <p
                   style={{
                     fontSize: "0.9375rem",
-                    color: "var(--text-muted)",
-                    lineHeight: 1.6,
-                    marginBottom: "16px",
+                    color: "var(--text-secondary)",
+                    lineHeight: 1.65,
+                    marginBottom: "18px",
                   }}
                 >
                   {project.problem}
@@ -720,7 +819,7 @@ export default function HomePage() {
                     display: "flex",
                     flexWrap: "wrap",
                     gap: "8px",
-                    marginBottom: "16px",
+                    marginBottom: "18px",
                   }}
                 >
                   {project.stack.slice(0, 6).map((tech) => (
@@ -735,9 +834,9 @@ export default function HomePage() {
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "6px",
+                    gap: "8px",
                     fontSize: "0.875rem",
-                    fontWeight: 500,
+                    fontWeight: 600,
                     color: "var(--accent-flag)",
                     transition: "gap var(--transition-base)",
                   }}
@@ -762,7 +861,7 @@ export default function HomePage() {
           variants={staggerContainer}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
             gap: "16px",
             marginBottom: "32px",
           }}
@@ -777,13 +876,32 @@ export default function HomePage() {
               variants={scaleIn}
               custom={idx}
               style={{
-                padding: "24px",
+                padding: "28px",
                 display: "flex",
                 flexDirection: "column",
-                gap: "12px",
+                gap: "14px",
                 textDecoration: "none",
+                position: "relative",
+                overflow: "hidden",
               }}
             >
+              {/* Side accent */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "2px",
+                  height: "100%",
+                  background:
+                    finding.platform === "Sherlock"
+                      ? "var(--accent-verify)"
+                      : finding.platform === "Code4rena"
+                        ? "var(--accent-flag)"
+                        : "var(--text-muted)",
+                  opacity: 0.5,
+                }}
+              />
               <div
                 style={{
                   display: "flex",
@@ -806,9 +924,9 @@ export default function HomePage() {
                   style={{
                     background:
                       finding.platform === "Sherlock"
-                        ? "rgba(16,185,129,0.1)"
+                        ? "rgba(34,197,94,0.1)"
                         : finding.platform === "Code4rena"
-                          ? "rgba(59,130,246,0.1)"
+                          ? "var(--accent-flag-soft)"
                           : "rgba(139,152,165,0.1)",
                     color:
                       finding.platform === "Sherlock"
@@ -817,6 +935,7 @@ export default function HomePage() {
                           ? "var(--accent-flag)"
                           : "var(--text-muted)",
                     borderColor: "transparent",
+                    fontWeight: 500,
                   }}
                 >
                   {finding.platform}
@@ -826,8 +945,8 @@ export default function HomePage() {
                 <p
                   style={{
                     fontSize: "0.875rem",
-                    color: "var(--text-muted)",
-                    lineHeight: 1.5,
+                    color: "var(--text-secondary)",
+                    lineHeight: 1.6,
                   }}
                 >
                   {finding.findingSummary}
@@ -839,7 +958,7 @@ export default function HomePage() {
                   alignItems: "center",
                   gap: "6px",
                   fontSize: "0.8125rem",
-                  fontWeight: 500,
+                  fontWeight: 600,
                   color: "var(--accent-flag)",
                   marginTop: "auto",
                 }}
@@ -869,7 +988,14 @@ export default function HomePage() {
           id="SEC-06"
           label="Hackathons, Achievements & Courses"
         />
-        <div className="timeline-rail" style={{ paddingLeft: "32px" }}>
+        <div
+          className="timeline-rail"
+          style={{
+            paddingLeft: "32px",
+            borderImage:
+              "linear-gradient(180deg, var(--accent-flag) 0%, rgba(139,92,246,0.5) 50%, rgba(167,139,250,0.2) 100%) 1",
+          }}
+        >
           {achievements.map((achievement, idx) => (
             <motion.div
               key={`${achievement.title}-${idx}`}
@@ -879,22 +1005,23 @@ export default function HomePage() {
               transition={{ delay: idx * 0.1, duration: 0.5 }}
               style={{
                 position: "relative",
-                paddingBottom: "36px",
-                paddingLeft: "24px",
+                paddingBottom: "40px",
+                paddingLeft: "28px",
               }}
             >
-              {/* Dot on rail */}
+              {/* Dot on rail with glow */}
               <div
                 style={{
                   position: "absolute",
                   left: "-32px",
                   top: "6px",
-                  width: "10px",
-                  height: "10px",
+                  width: "12px",
+                  height: "12px",
                   borderRadius: "50%",
-                  background: "var(--accent-flag)",
-                  border: "2px solid var(--bg-base)",
-                  boxShadow: "0 0 0 3px var(--border)",
+                  background: "var(--gradient-accent)",
+                  border: "2.5px solid var(--bg-base)",
+                  boxShadow:
+                    "0 0 0 3px rgba(99,102,241,0.2), 0 0 12px rgba(99,102,241,0.15)",
                 }}
               />
 
@@ -905,8 +1032,12 @@ export default function HomePage() {
                   fontSize: "0.75rem",
                   color: "var(--accent-flag)",
                   letterSpacing: "0.05em",
-                  display: "block",
-                  marginBottom: "6px",
+                  display: "inline-block",
+                  marginBottom: "8px",
+                  fontWeight: 600,
+                  background: "var(--accent-flag-soft)",
+                  padding: "2px 10px",
+                  borderRadius: "var(--radius-full)",
                 }}
               >
                 {achievement.year}
@@ -918,7 +1049,7 @@ export default function HomePage() {
                   fontSize: "1.125rem",
                   fontWeight: 600,
                   color: "var(--text-primary)",
-                  marginBottom: "4px",
+                  marginBottom: "6px",
                 }}
               >
                 {achievement.title}
@@ -927,9 +1058,9 @@ export default function HomePage() {
               <p
                 style={{
                   fontSize: "0.875rem",
-                  color: "var(--text-muted)",
-                  lineHeight: 1.5,
-                  marginBottom: "8px",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.6,
+                  marginBottom: "12px",
                 }}
               >
                 {achievement.description}
@@ -954,8 +1085,9 @@ export default function HomePage() {
                         display: "block",
                         maxWidth: "300px",
                         overflow: "hidden",
-                        borderRadius: "8px",
+                        borderRadius: "var(--radius-sm)",
                         border: "1px solid var(--border)",
+                        transition: "border-color var(--transition-base)",
                       }}
                     >
                       <Image
@@ -980,7 +1112,7 @@ export default function HomePage() {
                         maxWidth: "300px",
                         height: "215px",
                         overflow: "hidden",
-                        borderRadius: "8px",
+                        borderRadius: "var(--radius-sm)",
                         border: "1px solid var(--border)",
                         position: "relative",
                       }}
@@ -1062,7 +1194,7 @@ export default function HomePage() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
           variants={staggerContainer}
-          style={{ display: "flex", flexDirection: "column", gap: "28px" }}
+          style={{ display: "flex", flexDirection: "column", gap: "32px" }}
         >
           {techStack.map((category, idx) => (
             <motion.div key={category.label} variants={fadeUp} custom={idx}>
@@ -1073,12 +1205,13 @@ export default function HomePage() {
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                   color: "var(--accent-flag)",
-                  marginBottom: "12px",
+                  marginBottom: "14px",
+                  fontWeight: 600,
                 }}
               >
                 {category.label}
               </h4>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
                 {category.items.map((item: any) => {
                   const Icon = item.icon;
                   return (
@@ -1088,7 +1221,15 @@ export default function HomePage() {
                       style={{
                         display: "inline-flex",
                         alignItems: "center",
-                        gap: "6px",
+                        gap: "8px",
+                        borderRadius: "var(--radius-full)",
+                        padding: "6px 14px",
+                        fontSize: "0.8125rem",
+                        fontWeight: 500,
+                        background: "var(--bg-surface)",
+                        border: "1px solid var(--border)",
+                        transition:
+                          "border-color var(--transition-fast), background var(--transition-fast)",
                       }}
                     >
                       <Icon
@@ -1117,29 +1258,45 @@ export default function HomePage() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           style={{
-            padding: "32px",
+            padding: "36px",
             display: "flex",
             alignItems: "center",
-            gap: "20px",
+            gap: "24px",
             flexWrap: "wrap",
-            maxWidth: "600px",
+            maxWidth: "640px",
+            position: "relative",
+            overflow: "hidden",
           }}
         >
+          {/* Top gradient accent */}
           <div
             style={{
-              width: "48px",
-              height: "48px",
-              borderRadius: "12px",
-              background: "rgba(16,185,129,0.08)",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: "2px",
+              background:
+                "linear-gradient(90deg, var(--accent-verify), var(--accent-flag))",
+              opacity: 0.6,
+            }}
+          />
+          <div
+            style={{
+              width: "52px",
+              height: "52px",
+              borderRadius: "var(--radius-md)",
+              background:
+                "linear-gradient(135deg, rgba(34,197,94,0.12), rgba(34,197,94,0.04))",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              border: "1px solid rgba(16,185,129,0.15)",
+              border: "1px solid rgba(34,197,94,0.18)",
               flexShrink: 0,
             }}
           >
             <GraduationCap
-              size={24}
+              size={26}
               style={{ color: "var(--accent-verify)" }}
             />
           </div>
@@ -1147,18 +1304,19 @@ export default function HomePage() {
             <h4
               style={{
                 fontFamily: "var(--font-display), sans-serif",
-                fontSize: "1.125rem",
-                fontWeight: 600,
+                fontSize: "1.25rem",
+                fontWeight: 700,
                 color: "var(--text-primary)",
-                marginBottom: "4px",
+                marginBottom: "6px",
+                letterSpacing: "-0.01em",
               }}
             >
               IIIT Bhopal
             </h4>
             <p
               style={{
-                fontSize: "0.875rem",
-                color: "var(--text-muted)",
+                fontSize: "0.9375rem",
+                color: "var(--text-secondary)",
                 lineHeight: 1.5,
               }}
             >
@@ -1167,8 +1325,8 @@ export default function HomePage() {
             <div
               style={{
                 display: "flex",
-                gap: "16px",
-                marginTop: "8px",
+                gap: "12px",
+                marginTop: "12px",
                 flexWrap: "wrap",
               }}
             >
@@ -1176,8 +1334,11 @@ export default function HomePage() {
                 className="badge"
                 style={{
                   color: "var(--accent-verify)",
-                  borderColor: "rgba(16,185,129,0.25)",
-                  background: "rgba(16,185,129,0.06)",
+                  borderColor: "rgba(34,197,94,0.25)",
+                  background: "rgba(34,197,94,0.08)",
+                  borderRadius: "var(--radius-full)",
+                  fontWeight: 600,
+                  padding: "4px 14px",
                 }}
               >
                 CGPA: 7.57 / 10
@@ -1186,8 +1347,11 @@ export default function HomePage() {
                 className="badge"
                 style={{
                   color: "var(--accent-flag)",
-                  borderColor: "rgba(59,130,246,0.25)",
-                  background: "rgba(59,130,246,0.06)",
+                  borderColor: "rgba(99,102,241,0.25)",
+                  background: "var(--accent-flag-soft)",
+                  borderRadius: "var(--radius-full)",
+                  fontWeight: 600,
+                  padding: "4px 14px",
                 }}
               >
                 Expected 2027
@@ -1221,9 +1385,10 @@ export default function HomePage() {
               style={{
                 fontFamily: "var(--font-display), sans-serif",
                 fontSize: "1.5rem",
-                fontWeight: 600,
+                fontWeight: 700,
                 color: "var(--text-primary)",
-                marginBottom: "24px",
+                marginBottom: "28px",
+                letterSpacing: "-0.01em",
               }}
             >
               Get in touch
@@ -1243,8 +1408,8 @@ export default function HomePage() {
                     width: "100vw",
                     height: "100vh",
                     zIndex: 9999,
-                    background: "rgba(11, 15, 20, 0.7)",
-                    backdropFilter: "blur(8px)",
+                    background: "rgba(5, 5, 5, 0.75)",
+                    backdropFilter: "blur(12px)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -1257,27 +1422,65 @@ export default function HomePage() {
                     className="card"
                     onClick={(e) => e.stopPropagation()}
                     style={{
-                      padding: "48px 32px",
+                      padding: "56px 40px",
                       textAlign: "center",
-                      borderColor: "var(--accent-verify)",
-                      maxWidth: "450px",
+                      maxWidth: "460px",
                       background: "var(--bg-surface)",
+                      position: "relative",
+                      overflow: "hidden",
                     }}
                   >
-                    <Check
-                      size={48}
+                    {/* Gradient accent at top of modal */}
+                    <div
                       style={{
-                        color: "var(--accent-verify)",
-                        margin: "0 auto 24px",
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: "3px",
+                        background:
+                          "linear-gradient(90deg, var(--accent-verify), var(--accent-flag), var(--accent-verify))",
                       }}
                     />
+                    {/* Success glow */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "-40px",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        width: "200px",
+                        height: "200px",
+                        background:
+                          "radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 70%)",
+                        pointerEvents: "none",
+                      }}
+                    />
+                    <div
+                      style={{
+                        width: "56px",
+                        height: "56px",
+                        borderRadius: "50%",
+                        background: "rgba(34,197,94,0.1)",
+                        border: "1px solid rgba(34,197,94,0.2)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        margin: "0 auto 24px",
+                      }}
+                    >
+                      <Check
+                        size={28}
+                        style={{ color: "var(--accent-verify)" }}
+                      />
+                    </div>
                     <p
                       style={{
                         fontFamily: "var(--font-display), sans-serif",
                         fontSize: "1.5rem",
                         color: "var(--text-primary)",
-                        fontWeight: 600,
-                        marginBottom: "8px",
+                        fontWeight: 700,
+                        marginBottom: "12px",
                       }}
                     >
                       Message sent!
@@ -1285,8 +1488,8 @@ export default function HomePage() {
                     <p
                       style={{
                         fontSize: "1rem",
-                        color: "var(--text-muted)",
-                        lineHeight: 1.6,
+                        color: "var(--text-secondary)",
+                        lineHeight: 1.7,
                       }}
                     >
                       Your message has been sent directly to{" "}
@@ -1302,7 +1505,7 @@ export default function HomePage() {
 
             <form
               onSubmit={handleSubmit}
-              style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+              style={{ display: "flex", flexDirection: "column", gap: "20px" }}
             >
               {(["name", "email"] as const).map((field) => (
                 <div key={field}>
@@ -1311,9 +1514,10 @@ export default function HomePage() {
                     style={{
                       display: "block",
                       fontSize: "0.8125rem",
-                      color: "var(--text-muted)",
-                      marginBottom: "6px",
+                      color: "var(--text-secondary)",
+                      marginBottom: "8px",
                       textTransform: "capitalize",
+                      fontWeight: 500,
                     }}
                   >
                     {field}
@@ -1333,22 +1537,26 @@ export default function HomePage() {
                     disabled={formStatus === "loading"}
                     style={{
                       width: "100%",
-                      padding: "12px 16px",
-                      background: "var(--bg-surface)",
+                      padding: "14px 18px",
+                      background: "var(--bg-elevated)",
                       border: "1px solid var(--border)",
-                      borderRadius: "6px",
+                      borderRadius: "var(--radius-sm)",
                       color: "var(--text-primary)",
                       fontSize: "0.9375rem",
                       fontFamily: "var(--font-body), sans-serif",
-                      transition: "border-color var(--transition-base)",
+                      transition:
+                        "border-color var(--transition-base), box-shadow var(--transition-base)",
                       outline: "none",
                     }}
-                    onFocus={(e) =>
-                      (e.target.style.borderColor = "var(--accent-flag)")
-                    }
-                    onBlur={(e) =>
-                      (e.target.style.borderColor = "var(--border)")
-                    }
+                    onFocus={(e) => {
+                      e.target.style.borderColor = "var(--accent-flag)";
+                      e.target.style.boxShadow =
+                        "0 0 0 3px rgba(99,102,241,0.1)";
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = "var(--border)";
+                      e.target.style.boxShadow = "none";
+                    }}
                   />
                 </div>
               ))}
@@ -1358,8 +1566,9 @@ export default function HomePage() {
                   style={{
                     display: "block",
                     fontSize: "0.8125rem",
-                    color: "var(--text-muted)",
-                    marginBottom: "6px",
+                    color: "var(--text-secondary)",
+                    marginBottom: "8px",
+                    fontWeight: 500,
                   }}
                 >
                   Message
@@ -1379,21 +1588,26 @@ export default function HomePage() {
                   disabled={formStatus === "loading"}
                   style={{
                     width: "100%",
-                    padding: "12px 16px",
-                    background: "var(--bg-surface)",
+                    padding: "14px 18px",
+                    background: "var(--bg-elevated)",
                     border: "1px solid var(--border)",
-                    borderRadius: "6px",
+                    borderRadius: "var(--radius-sm)",
                     color: "var(--text-primary)",
                     fontSize: "0.9375rem",
                     fontFamily: "var(--font-body), sans-serif",
                     resize: "vertical",
                     outline: "none",
-                    transition: "border-color var(--transition-base)",
+                    transition:
+                      "border-color var(--transition-base), box-shadow var(--transition-base)",
                   }}
-                  onFocus={(e) =>
-                    (e.target.style.borderColor = "var(--accent-flag)")
-                  }
-                  onBlur={(e) => (e.target.style.borderColor = "var(--border)")}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = "var(--accent-flag)";
+                    e.target.style.boxShadow = "0 0 0 3px rgba(99,102,241,0.1)";
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = "var(--border)";
+                    e.target.style.boxShadow = "none";
+                  }}
                 />
               </div>
 
@@ -1446,9 +1660,10 @@ export default function HomePage() {
               style={{
                 fontFamily: "var(--font-display), sans-serif",
                 fontSize: "1.5rem",
-                fontWeight: 600,
+                fontWeight: 700,
                 color: "var(--text-primary)",
-                marginBottom: "24px",
+                marginBottom: "28px",
+                letterSpacing: "-0.01em",
               }}
             >
               Contact links
@@ -1462,7 +1677,7 @@ export default function HomePage() {
                   key={link.label}
                   className="card"
                   style={{
-                    padding: "16px 20px",
+                    padding: "18px 22px",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between",
@@ -1480,10 +1695,11 @@ export default function HomePage() {
                     {link.icon && (
                       <div
                         style={{
-                          width: "36px",
-                          height: "36px",
-                          borderRadius: "8px",
-                          background: "var(--bg-base)",
+                          width: "40px",
+                          height: "40px",
+                          borderRadius: "var(--radius-sm)",
+                          background:
+                            "linear-gradient(135deg, rgba(34,197,94,0.08), rgba(99,102,241,0.06))",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
@@ -1503,9 +1719,10 @@ export default function HomePage() {
                           display: "block",
                           fontSize: "0.75rem",
                           color: "var(--text-muted)",
-                          marginBottom: "2px",
+                          marginBottom: "3px",
                           textTransform: "uppercase",
-                          letterSpacing: "0.05em",
+                          letterSpacing: "0.06em",
+                          fontWeight: 500,
                         }}
                       >
                         {link.label}
@@ -1521,7 +1738,8 @@ export default function HomePage() {
                             color: "var(--accent-flag)",
                             display: "inline-flex",
                             alignItems: "center",
-                            gap: "4px",
+                            gap: "6px",
+                            fontWeight: 500,
                           }}
                         >
                           {link.value} <ExternalLink size={12} />

@@ -46,18 +46,56 @@ export default function SecurityResearchPage() {
         className="container-main"
         style={{ paddingTop: 120, paddingBottom: "var(--section-gap)" }}
       >
-        <h1
+        {/* Decorative gradient glow behind hero */}
+        <div
           style={{
-            fontFamily: "var(--font-display), sans-serif",
-            fontSize: "clamp(2.4rem, 5vw, 3.6rem)",
-            fontWeight: 700,
-            color: "var(--text-primary)",
-            lineHeight: 1.15,
-            marginBottom: 28,
+            position: "relative",
           }}
         >
-          Security Research
-        </h1>
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: -120,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: 600,
+              height: 320,
+              background:
+                "radial-gradient(ellipse at center, rgba(99,102,241,0.08) 0%, transparent 70%)",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+          />
+          <h1
+            style={{
+              fontFamily: "var(--font-display), sans-serif",
+              fontSize: "clamp(2.4rem, 5vw, 3.6rem)",
+              fontWeight: 700,
+              color: "var(--text-primary)",
+              lineHeight: 1.15,
+              marginBottom: 12,
+              position: "relative",
+              zIndex: 1,
+            }}
+          >
+            Security Research
+          </h1>
+          <p
+            style={{
+              fontFamily: "var(--font-body), sans-serif",
+              fontSize: "1.05rem",
+              color: "var(--text-muted)",
+              lineHeight: 1.6,
+              maxWidth: 560,
+              marginBottom: 36,
+              position: "relative",
+              zIndex: 1,
+            }}
+          >
+            Competitive smart-contract auditing across leading platforms.
+          </p>
+        </div>
 
         {/* Stats Flex Layout */}
         <div
@@ -261,7 +299,29 @@ export default function SecurityResearchPage() {
           }}
         >
           {validatedFindings.map((f, i) => (
-            <div key={i} className="card" style={{ padding: "28px 28px 24px" }}>
+            <div
+              key={i}
+              className="card"
+              style={{
+                padding: "28px 28px 24px",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              {/* Subtle top accent line */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  height: 2,
+                  background:
+                    "linear-gradient(90deg, rgba(99,102,241,0.5) 0%, rgba(139,92,246,0.3) 50%, transparent 100%)",
+                }}
+              />
+
               {/* Header row */}
               <div
                 style={{
@@ -457,7 +517,7 @@ export default function SecurityResearchPage() {
                 width: 52px;
                 height: 52px;
                 border-radius: 50%;
-                background: rgba(242, 169, 59, 0.12);
+                background: rgba(99, 102, 241, 0.12);
                 border: 2px solid var(--accent-flag);
                 display: flex;
                 align-items: center;
@@ -468,11 +528,12 @@ export default function SecurityResearchPage() {
                 color: var(--accent-flag);
                 position: relative;
                 z-index: 2;
-                transition: background var(--transition-base), transform var(--transition-base);
+                transition: background var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
               }
               .meth-step:hover .meth-circle {
-                background: rgba(242, 169, 59, 0.25);
+                background: rgba(99, 102, 241, 0.25);
                 transform: scale(1.1);
+                box-shadow: 0 0 24px rgba(99,102,241,0.2);
               }
               /* step label */
               .meth-label {
@@ -615,6 +676,19 @@ export default function SecurityResearchPage() {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 20px;
               }
+              .knowledge-card {
+                position: relative;
+                overflow: hidden;
+              }
+              .knowledge-card::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(90deg, transparent 0%, rgba(99,102,241,0.3) 50%, transparent 100%);
+              }
               @media (max-width: 1024px) {
                 .knowledge-grid { grid-template-columns: repeat(2, 1fr); }
               }
@@ -627,7 +701,11 @@ export default function SecurityResearchPage() {
 
         <div className="knowledge-grid">
           {securityKnowledge.map((item, i) => (
-            <div key={i} className="card" style={{ padding: "24px 24px 22px" }}>
+            <div
+              key={i}
+              className="card knowledge-card"
+              style={{ padding: "24px 24px 22px" }}
+            >
               <h3
                 style={{
                   fontFamily: "var(--font-display), sans-serif",
@@ -709,7 +787,7 @@ export default function SecurityResearchPage() {
                 border-bottom: none;
               }
               .archive-table tr:hover td {
-                background: rgba(242, 169, 59, 0.04);
+                background: rgba(99, 102, 241, 0.04);
               }
               .archive-table .proto-name {
                 font-family: var(--font-mono), monospace;

@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sourav Yadav — Protocol Engineer & Smart Contract Security Researcher
 
-## Getting Started
+A high-performance, premium dark-themed personal portfolio showcasing my work as a **Protocol Engineer & Smart Contract Security Researcher**. Built with modern web technologies, it highlights my competitive audit archive, comprehensive protocol case studies, and engineering achievements.
 
-First, run the development server:
+## 🛠️ Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework:** [Next.js 14+](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** Tailwind CSS / Custom CSS Variables (Premium Dark Aesthetic)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **Icons:** [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
+- **Form Handling:** [Web3Forms](https://web3forms.com/) (Serverless Contact Form)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Security Research Archive:** Dynamic mapping of competitive audits across Sherlock, Code4rena, and Cantina, complete with severity breakdown, timeline, and platform-specific styling.
+- **Project Case Studies:** Deep-dive breakdown of protocol engineering work, system architecture, key metrics, and roadmap timelines.
+- **Interactive Methodology:** Custom CSS-grid based interactive flow diagram for my audit methodology.
+- **Web3Forms Integration:** Fully functional contact form connected directly to email without requiring a dedicated backend server.
+- **Data-Driven UI:** The entire site is powered by isolated data files in `src/data`, making it incredibly easy to update stats, projects, and findings without touching UI code.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚙️ Local Development
 
-## Learn More
+1. **Clone the repository**
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   git clone https://github.com/Sourav-IIITBPL/sourav.git
+   cd sourav
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Install dependencies**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Configure Environment Variables**
+   Create a `.env.local` file in the root directory and add your Web3Forms Access Key to enable the contact form functionality:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```env
+   NEXT_PUBLIC_WEB3FORMS_KEY=your_access_key_here
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   _(Note: The app will still compile without this key, but the contact form will not successfully send messages.)_
+
+4. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the application running locally.

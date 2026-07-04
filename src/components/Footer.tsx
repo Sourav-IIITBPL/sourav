@@ -8,48 +8,90 @@ export default function Footer() {
     <footer
       style={{
         borderTop: "1px solid var(--border)",
-        background: "var(--bg-surface)",
-        paddingTop: 64,
-        paddingBottom: 24,
+        background: "var(--bg-elevated)",
+        position: "relative",
       }}
     >
+      {/* Subtle top gradient glow */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "60%",
+          height: "1px",
+          background:
+            "linear-gradient(90deg, transparent, var(--accent-flag), transparent)",
+          opacity: 0.4,
+        }}
+      />
+
       <div
         className="container-main"
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 40,
+          gridTemplateColumns: "1.5fr 1fr 1fr 1fr",
+          gap: 48,
+          paddingTop: 64,
+          paddingBottom: 48,
         }}
       >
         {/* Column 1 — Identity */}
         <div>
           <div
             style={{
-              fontFamily: "var(--font-display), sans-serif",
-              fontSize: "1.25rem",
-              fontWeight: 700,
-              color: "var(--text-primary)",
-              marginBottom: 8,
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              marginBottom: 16,
             }}
           >
-            Sourav
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 28,
+                height: 28,
+                borderRadius: "var(--radius-sm)",
+                background: "var(--gradient-accent)",
+                fontSize: "0.75rem",
+                fontWeight: 700,
+                color: "white",
+              }}
+            >
+              S
+            </span>
+            <span
+              style={{
+                fontFamily: "var(--font-display), sans-serif",
+                fontSize: "1.125rem",
+                fontWeight: 600,
+                color: "var(--text-primary)",
+              }}
+            >
+              Sourav Yadav
+            </span>
           </div>
           <div
             style={{
               fontFamily: "var(--font-mono), monospace",
-              fontSize: "0.75rem",
+              fontSize: "0.6875rem",
               color: "var(--text-muted)",
               lineHeight: 1.6,
               marginBottom: 12,
+              letterSpacing: "0.02em",
             }}
           >
-            Protocol Engineer · Smart Contract Security Researcher
+            Protocol Engineer · Security Researcher
           </div>
           <p
             style={{
               fontSize: "0.8125rem",
               color: "var(--text-muted)",
-              lineHeight: 1.6,
+              lineHeight: 1.7,
+              maxWidth: 280,
             }}
           >
             Building secure protocol infrastructure and auditing production DeFi
@@ -62,14 +104,15 @@ export default function Footer() {
           <div
             style={{
               fontFamily: "var(--font-mono), monospace",
-              fontSize: "0.6875rem",
-              color: "var(--accent-flag)",
-              letterSpacing: "0.1em",
+              fontSize: "0.625rem",
+              color: "var(--text-muted)",
+              letterSpacing: "0.15em",
               textTransform: "uppercase",
-              marginBottom: 16,
+              marginBottom: 20,
+              fontWeight: 500,
             }}
           >
-            Sitemap
+            Navigate
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {[
@@ -81,7 +124,7 @@ export default function Footer() {
                 key={link.href}
                 href={link.href}
                 style={{
-                  fontSize: "0.875rem",
+                  fontSize: "0.8125rem",
                   color: "var(--text-muted)",
                   transition: "color 0.2s ease",
                 }}
@@ -103,11 +146,12 @@ export default function Footer() {
           <div
             style={{
               fontFamily: "var(--font-mono), monospace",
-              fontSize: "0.6875rem",
-              color: "var(--accent-flag)",
-              letterSpacing: "0.1em",
+              fontSize: "0.625rem",
+              color: "var(--text-muted)",
+              letterSpacing: "0.15em",
               textTransform: "uppercase",
-              marginBottom: 16,
+              marginBottom: 20,
+              fontWeight: 500,
             }}
           >
             Profiles
@@ -120,9 +164,12 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  fontSize: "0.875rem",
+                  fontSize: "0.8125rem",
                   color: "var(--text-muted)",
                   transition: "color 0.2s ease",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
                 }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.color = "var(--text-primary)")
@@ -132,46 +179,48 @@ export default function Footer() {
                 }
               >
                 {profile.icon && (
-                  <profile.icon
-                    size={14}
-                    style={{
-                      display: "inline",
-                      marginRight: 8,
-                      verticalAlign: "middle",
-                      color: "var(--accent-verify)",
-                    }}
-                  />
+                  <profile.icon size={13} style={{ opacity: 0.6 }} />
                 )}
-                <span style={{ verticalAlign: "middle" }}>{profile.name}</span>
+                {profile.name}
               </a>
             ))}
           </div>
         </div>
 
-        {/* Column 4 — Direct Contact */}
+        {/* Column 4 — Contact */}
         <div>
           <div
             style={{
               fontFamily: "var(--font-mono), monospace",
-              fontSize: "0.6875rem",
-              color: "var(--accent-flag)",
-              letterSpacing: "0.1em",
+              fontSize: "0.625rem",
+              color: "var(--text-muted)",
+              letterSpacing: "0.15em",
               textTransform: "uppercase",
-              marginBottom: 16,
+              marginBottom: 20,
+              fontWeight: 500,
             }}
           >
             Contact
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {contactLinks.map((contact) => (
-              <div key={contact.label}>
+              <div
+                key={contact.label}
+                style={{ display: "flex", alignItems: "center", gap: 8 }}
+              >
+                {contact.icon && (
+                  <contact.icon
+                    size={13}
+                    style={{ color: "var(--text-muted)", opacity: 0.6 }}
+                  />
+                )}
                 {contact.url ? (
                   <a
                     href={contact.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
-                      fontSize: "0.875rem",
+                      fontSize: "0.8125rem",
                       color: "var(--text-muted)",
                       transition: "color 0.2s ease",
                     }}
@@ -182,42 +231,16 @@ export default function Footer() {
                       (e.currentTarget.style.color = "var(--text-muted)")
                     }
                   >
-                    {contact.icon && (
-                      <contact.icon
-                        size={14}
-                        style={{
-                          display: "inline",
-                          marginRight: 8,
-                          verticalAlign: "middle",
-                          color: "var(--accent-verify)",
-                        }}
-                      />
-                    )}
-                    <span style={{ verticalAlign: "middle" }}>
-                      {contact.value}
-                    </span>
+                    {contact.value}
                   </a>
                 ) : (
                   <span
                     style={{
-                      fontSize: "0.875rem",
+                      fontSize: "0.8125rem",
                       color: "var(--text-muted)",
                     }}
                   >
-                    {contact.icon && (
-                      <contact.icon
-                        size={14}
-                        style={{
-                          display: "inline",
-                          marginRight: 8,
-                          verticalAlign: "middle",
-                          color: "var(--accent-verify)",
-                        }}
-                      />
-                    )}
-                    <span style={{ verticalAlign: "middle" }}>
-                      {contact.value}
-                    </span>
+                    {contact.value}
                   </span>
                 )}
               </div>
@@ -230,20 +253,36 @@ export default function Footer() {
       <div
         className="container-main"
         style={{
-          marginTop: 48,
-          paddingTop: 24,
+          paddingTop: 20,
+          paddingBottom: 20,
           borderTop: "1px solid var(--border)",
-          textAlign: "center",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: 12,
         }}
       >
         <span
           style={{
             fontFamily: "var(--font-mono), monospace",
-            fontSize: "0.75rem",
+            fontSize: "0.6875rem",
             color: "var(--text-muted)",
+            letterSpacing: "0.02em",
           }}
         >
-          © 2026 Sourav Yadav
+          © {new Date().getFullYear()} Sourav Yadav
+        </span>
+        <span
+          style={{
+            fontFamily: "var(--font-mono), monospace",
+            fontSize: "0.6875rem",
+            color: "var(--text-muted)",
+            letterSpacing: "0.02em",
+            opacity: 0.5,
+          }}
+        >
+          Built with Next.js
         </span>
       </div>
     </footer>
