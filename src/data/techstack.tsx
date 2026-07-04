@@ -39,7 +39,7 @@ export const techStack: TechCategory[] = [
       { name: "Aderyn", icon: Shield, color: '#818CF8' },
       { name: "Mythril", icon: SearchCode, color: '#10B981' },
       { name: "Tenderly", icon: Wrench, color: '#9CA3AF' },
-      { name: "Exploit PoC Dev", icon: Code2, color: '#38BDF8' },
+      { name: "Exploit PoC", icon: Code2, color: '#38BDF8' },
     ],
   },
   {

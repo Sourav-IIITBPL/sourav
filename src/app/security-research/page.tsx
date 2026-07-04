@@ -11,7 +11,7 @@ import {
 export const metadata: Metadata = {
   title: "Security Research — Sourav Yadav",
   description:
-    "Smart contract security research: 21+ protocol audits, validated findings, methodology, and competitive audit archive.",
+    "Smart contract security research: 20+ protocol audits, validated findings, methodology, and competitive audit archive.",
 };
 
 /* ── Platform color map ── */
@@ -66,7 +66,7 @@ export default function SecurityResearchPage() {
               lineHeight: 1,
             }}
           >
-            21+
+            20+
           </span>
           <span
             style={{
@@ -150,13 +150,16 @@ export default function SecurityResearchPage() {
                 </span>
               </div>
 
-              {/* Category tag */}
-              <span
-                className="badge"
-                style={{ marginBottom: 14, fontSize: "0.7rem" }}
-              >
-                {f.category}
-              </span>
+              {/* Metadata tags */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 14 }}>
+                <span className="badge" style={{ fontSize: "0.7rem", color: 'var(--text-primary)' }}>{f.category}</span>
+                {f.severity && f.severity.filter(Boolean).map(s => (
+                  <span key={s} className="badge" style={{ fontSize: "0.7rem", borderColor: s === 'High' ? 'rgba(239,68,68,0.3)' : 'var(--border)', color: s === 'High' ? '#ef4444' : s === 'Medium' ? '#f59e0b' : 'var(--text-muted)' }}>{s}</span>
+                ))}
+                {f.time && <span className="badge" style={{ fontSize: "0.7rem" }}>{f.time}</span>}
+                {f.rank && <span className="badge" style={{ fontSize: "0.7rem", color: 'var(--accent-verify)' }}>Rank {f.rank}</span>}
+                {f.findings !== undefined && <span className="badge" style={{ fontSize: "0.7rem" }}>{f.findings} Findings</span>}
+              </div>
 
               {/* Summary */}
               {f.findingSummary && (
@@ -171,6 +174,15 @@ export default function SecurityResearchPage() {
                 >
                   {f.findingSummary}
                 </p>
+              )}
+
+              {/* Technologies */}
+              {f.technologies && f.technologies.length > 0 && (
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 18 }}>
+                  {f.technologies.map(tech => (
+                    <span key={tech} className="badge" style={{ fontSize: "0.7rem", fontFamily: 'var(--font-mono), monospace' }}>{tech}</span>
+                  ))}
+                </div>
               )}
 
               {/* Link */}
@@ -522,8 +534,7 @@ export default function SecurityResearchPage() {
               <tr>
                 <th>Protocol</th>
                 <th>Platform</th>
-                <th>Category</th>
-                <th>Status</th>
+                <th>Date</th>
                 <th>Link</th>
               </tr>
             </thead>
@@ -544,8 +555,7 @@ export default function SecurityResearchPage() {
                       {a.platform}
                     </span>
                   </td>
-                  <td>{a.category}</td>
-                  <td>{a.status}</td>
+                  <td>{a.date}</td>
                   <td>
                     <a
                       href={a.link}
@@ -614,10 +624,7 @@ export default function SecurityResearchPage() {
               >
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   <span className="badge" style={{ fontSize: "0.72rem" }}>
-                    {a.category}
-                  </span>
-                  <span className="badge" style={{ fontSize: "0.72rem" }}>
-                    {a.status}
+                    {a.date}
                   </span>
                 </div>
                 <a

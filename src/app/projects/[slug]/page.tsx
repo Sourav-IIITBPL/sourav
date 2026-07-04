@@ -181,6 +181,40 @@ export default async function ProjectPage({
         </section>
 
         {/* ════════════════════════════════════════════
+            §2.5  METRICS
+            ════════════════════════════════════════════ */}
+        {project.metrics && project.metrics.length > 0 && (
+          <section className="section-spacing" style={{ paddingTop: 0 }}>
+            <SectionEyebrow id="SEC-P1-B" label="Key Metrics" />
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+                gap: 16,
+                marginTop: 16,
+              }}
+            >
+              {project.metrics.map((metric, i) => (
+                <div
+                  key={i}
+                  className="card"
+                  style={{
+                    padding: '20px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 8,
+                    textAlign: 'center'
+                  }}
+                >
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono), monospace' }}>{metric.label}</span>
+                  <span style={{ fontSize: '1.25rem', color: 'var(--text-primary)', fontWeight: 600, fontFamily: 'var(--font-display), sans-serif' }}>{metric.value}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* ════════════════════════════════════════════
             §3  THE PROBLEM
             ════════════════════════════════════════════ */}
         <section className="section-spacing" style={{ paddingTop: 0 }}>
@@ -253,6 +287,56 @@ export default async function ProjectPage({
             ))}
           </div>
         </section>
+
+        {/* ════════════════════════════════════════════
+            §5.5  KEY FEATURES
+            ════════════════════════════════════════════ */}
+        {project.keyFeatures && project.keyFeatures.length > 0 && (
+          <section className="section-spacing" style={{ paddingTop: 0 }}>
+            <SectionEyebrow id="SEC-P4-B" label="Key Features" />
+            <ul
+              style={{
+                listStyle: 'none',
+                padding: 0,
+                marginTop: 16,
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+                gap: 16,
+              }}
+            >
+              {project.keyFeatures.map((feature, i) => (
+                <li
+                  key={i}
+                  className="card"
+                  style={{
+                    padding: '16px 20px',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 12,
+                    fontFamily: 'var(--font-body), sans-serif',
+                    fontSize: '0.9375rem',
+                    lineHeight: 1.6,
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      width: 8,
+                      height: 8,
+                      borderRadius: '50%',
+                      background: 'var(--accent-flag)',
+                      marginTop: 7,
+                      flexShrink: 0,
+                    }}
+                    aria-hidden="true"
+                  />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {/* ════════════════════════════════════════════
             §6  CHALLENGES & SOLUTIONS

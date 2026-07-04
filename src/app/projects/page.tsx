@@ -198,7 +198,7 @@ export default function ProjectsPage() {
                       textDecoration: 'none',
                     }}
                   >
-                    View Case Study →
+                    Explore Project →
                   </Link>
                 </div>
               </div>

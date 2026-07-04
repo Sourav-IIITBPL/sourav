@@ -130,7 +130,8 @@ export default function Footer() {
                   (e.currentTarget.style.color = "var(--text-muted)")
                 }
               >
-                {profile.name}
+                {profile.icon && <profile.icon size={14} style={{ display: 'inline', marginRight: 8, verticalAlign: 'middle', color: 'var(--accent-verify)' }} />}
+                <span style={{ verticalAlign: 'middle' }}>{profile.name}</span>
               </a>
             ))}
           </div>
@@ -170,7 +171,8 @@ export default function Footer() {
                       (e.currentTarget.style.color = "var(--text-muted)")
                     }
                   >
-                    {contact.value}
+                    {contact.icon && <contact.icon size={14} style={{ display: 'inline', marginRight: 8, verticalAlign: 'middle', color: 'var(--accent-verify)' }} />}
+                    <span style={{ verticalAlign: 'middle' }}>{contact.value}</span>
                   </a>
                 ) : (
                   <span
@@ -179,7 +181,8 @@ export default function Footer() {
                       color: "var(--text-muted)",
                     }}
                   >
-                    {contact.value}
+                    {contact.icon && <contact.icon size={14} style={{ display: 'inline', marginRight: 8, verticalAlign: 'middle', color: 'var(--accent-verify)' }} />}
+                    <span style={{ verticalAlign: 'middle' }}>{contact.value}</span>
                   </span>
                 )}
               </div>

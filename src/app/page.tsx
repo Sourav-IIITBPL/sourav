@@ -358,7 +358,7 @@ export default function HomePage() {
             color: 'var(--text-muted)',
             marginBottom: '16px',
           }}>
-            I&apos;m a Web3 Full-Stack Engineer and Smart Contract Security Researcher who builds resilient decentralized systems and breaks them before blackhats do. My journey in the Ethereum ecosystem is driven by a deep fascination with protocol accounting, cryptography, and mechanism design. Over the past year, I have audited 20+ production DeFi protocols across Sherlock, Code4rena, and Cantina — diving deep into complex AMMs, lending markets, ERC4626 vaults, and cross-chain messaging infrastructure. This rigorous security research has surfaced 11 high-impact, validated vulnerabilities, saving protocols from potential exploits.
+            I&apos;m a Protocol Engineer, Smart Contract Security Researcher, and Web3 Full-Stack Engineer who builds resilient decentralized systems and secures them through rigorous adversarial analysis. My journey into the Ethereum ecosystem has been driven by a deep curiosity for protocol accounting, cryptography, distributed systems, and mechanism design. Over the past year, I've audited 20+ production DeFi protocols across Sherlock, Code4rena, and Cantina, analyzing complex AMMs, lending markets, ERC-4626 vaults, staking protocols, and cross-chain messaging infrastructure. This hands-on security research has led to 11 validated findings, helping uncover critical vulnerabilities before they could impact production systems.
           </p>
           <p style={{
             maxWidth: '800px',
@@ -366,7 +366,15 @@ export default function HomePage() {
             lineHeight: 1.8,
             color: 'var(--text-muted)',
           }}>
-            On the builder side, I engineer secure, high-performance Web3 applications. I&apos;ve architected and shipped pre-transaction security middleware, a yield-generating payment protocol tailored for B2B settlements, and a multi-chain DEX routing infrastructure that seamlessly spans 9 different networks. I think in invariants, threat models, and edge cases. I write my code exactly the way I audit it — operating under the fundamental assumption that it will be relentlessly attacked. I am currently pursuing my B.Tech at IIIT Bhopal, graduating in 2027, and continuously pushing the boundaries of Web3 security and scalable architecture.
+            Beyond security research, I enjoy designing and building production-grade Web3 infrastructure. I've architected PreFlight, a pre-transaction security middleware that combines on-chain protocol guards with off-chain simulation to protect DeFi users before execution; SettleOne, a yield-generating payment commitment protocol for secure B2B settlements; Protocol Invariant Checker (PIC), a modular Rust framework for protocol security analysis; and DexGateway, a multi-chain DEX routing platform spanning nine blockchain networks. I approach every protocol with an engineer's mindset—thinking in invariants, threat models, protocol correctness, and adversarial edge cases. I write code with the same scrutiny I apply during security reviews, operating under the assumption that every production system will eventually be tested by determined adversaries.
+          </p>
+          <p style={{
+            maxWidth: '800px',
+            fontSize: '1.0625rem',
+            lineHeight: 1.8,
+            color: 'var(--text-muted)',
+          }}>
+            I&apos;m currently pursuing my B.Tech in Electronics & Communication Engineering at IIIT Bhopal, graduating in 2027, while continuing to deepen my expertise in protocol engineering, smart contract security, and scalable decentralized infrastructure.
           </p>
         </motion.div>
       </section>
@@ -375,7 +383,7 @@ export default function HomePage() {
           5. FEATURED PROFILES
           ═══════════════════════════════════════════ */}
       <section className="section-spacing container-main">
-        <SectionEyebrow id="SEC-04" label="Profiles" />
+        <SectionEyebrow id="SEC-02" label="Profiles" />
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -469,7 +477,7 @@ export default function HomePage() {
           3. STATISTICS
           ═══════════════════════════════════════════ */}
       <section className="section-spacing container-main" ref={statsSection.ref}>
-        <SectionEyebrow id="SEC-02" label="Statistics" />
+        <SectionEyebrow id="SEC-03" label="Statistics" />
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -491,7 +499,7 @@ export default function HomePage() {
           4. FEATURED PROJECTS
           ═══════════════════════════════════════════ */}
       <section className="section-spacing container-main">
-        <SectionEyebrow id="SEC-03" label="Featured Projects" />
+        <SectionEyebrow id="SEC-04" label="Featured Projects" />
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -600,7 +608,7 @@ export default function HomePage() {
                     transition: 'gap var(--transition-base)',
                   }}
                 >
-                  View Case Study <ArrowRight size={14} />
+                  Explore Project <ArrowRight size={14} />
                 </Link>
               </div>
             </motion.div>
@@ -693,7 +701,7 @@ export default function HomePage() {
 
         <div style={{ textAlign: 'center' }}>
           <Link href="/security-research" className="btn-secondary" style={{ display: 'inline-flex' }}>
-            View All Research <ArrowRight size={14} />
+            Explore Security Research <ArrowRight size={14} />
           </Link>
         </div>
       </section>
@@ -762,13 +770,20 @@ export default function HomePage() {
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                {achievement.certificatePath && achievement.certificatePath.match(/\.(jpeg|jpg|gif|png)$/i) && (
-                  <a href={achievement.certificatePath} target="_blank" rel="noopener noreferrer" style={{ display: 'block', maxWidth: '300px', overflow: 'hidden', borderRadius: '8px', border: '1px solid var(--border)' }}>
-                    <Image src={achievement.certificatePath} alt={achievement.title} width={300} height={200} style={{ width: '100%', height: 'auto', display: 'block' }} />
-                  </a>
+                {achievement.certificatePath && (
+                  achievement.certificatePath.match(/\.(jpeg|jpg|gif|png|webp)$/i) ? (
+                    <a href={achievement.certificatePath} target="_blank" rel="noopener noreferrer" style={{ display: 'block', maxWidth: '300px', overflow: 'hidden', borderRadius: '8px', border: '1px solid var(--border)' }}>
+                      <Image src={achievement.certificatePath} alt={achievement.title} width={300} height={200} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                    </a>
+                  ) : achievement.certificatePath.match(/\.pdf$/i) ? (
+                    <a href={achievement.certificatePath} target="_blank" rel="noopener noreferrer" style={{ display: 'block', maxWidth: '300px', height: '215px', overflow: 'hidden', borderRadius: '8px', border: '1px solid var(--border)', position: 'relative' }}>
+                      <div style={{ position: 'absolute', inset: 0, zIndex: 10, cursor: 'pointer' }} />
+                      <iframe src={`${achievement.certificatePath}#view=FitH&toolbar=0&navpanes=0&scrollbar=0`} style={{ width: '100%', height: '100%', border: 'none', pointerEvents: 'none' }} title={achievement.title} tabIndex={-1} scrolling="no" />
+                    </a>
+                  ) : null
                 )}
                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                  {achievement.certificatePath && !achievement.certificatePath.match(/\.(jpeg|jpg|gif|png)$/i) && (
+                  {achievement.certificatePath && !achievement.certificatePath.match(/\.(jpeg|jpg|gif|png|webp|pdf)$/i) && (
                     <a
                       href={achievement.certificatePath}
                       target="_blank"
@@ -1138,17 +1153,33 @@ export default function HomePage() {
                     flexWrap: 'wrap',
                   }}
                 >
-                  <div>
-                    <span style={{
-                      display: 'block',
-                      fontSize: '0.75rem',
-                      color: 'var(--text-muted)',
-                      marginBottom: '2px',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.05em',
-                    }}>
-                      {link.label}
-                    </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    {link.icon && (
+                      <div style={{
+                        width: '36px',
+                        height: '36px',
+                        borderRadius: '8px',
+                        background: 'var(--bg-base)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        border: '1px solid var(--border)',
+                        flexShrink: 0
+                      }}>
+                        <link.icon size={18} style={{ color: 'var(--accent-verify)' }} />
+                      </div>
+                    )}
+                    <div>
+                      <span style={{
+                        display: 'block',
+                        fontSize: '0.75rem',
+                        color: 'var(--text-muted)',
+                        marginBottom: '2px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.05em',
+                      }}>
+                        {link.label}
+                      </span>
                     {link.url ? (
                       <a
                         href={link.url}
@@ -1174,6 +1205,7 @@ export default function HomePage() {
                         {link.value}
                       </span>
                     )}
+                    </div>
                   </div>
                   {link.copyable && <CopyButton text={link.value} />}
                 </div>

@@ -1,4 +1,6 @@
-import { SiGithub, SiLeetcode } from "react-icons/si";
+import {SiGithub,SiLeetcode,SiDiscord,SiTelegram,SiX,SiGmail} from "react-icons/si";
+import { MdEmail } from "react-icons/md";
+import { FaLinkedin } from "react-icons/fa";
 
 export const FaviconIcon = (domain: string) => {
   const Icon = (props: any) => (
@@ -68,6 +70,7 @@ export interface ContactLink {
   value: string;
   url?: string;
   copyable?: boolean;
+  icon: any;
 }
 
 export const contactLinks: ContactLink[] = [
@@ -76,34 +79,59 @@ export const contactLinks: ContactLink[] = [
     value: "sourav.dev.official@outlook.com",
     url: "mailto:sourav.dev.official@outlook.com",
     copyable: true,
+    icon: MdEmail,
   },
   {
     label: "Alt Email",
     value: "sourav.dev.officials@gmail.com",
     url: "mailto:sourav.dev.officials@gmail.com",
     copyable: true,
+    icon: SiGmail,
   },
   {
     label: "Discord",
     value: "miracles_25",
     copyable: true,
+    icon: SiDiscord,
   },
   {
     label: "Telegram",
     value: "@sourav-developer",
     url: "https://t.me/sourav-developer",
+    icon: SiTelegram,
   },
   {
     label: "X",
     value: "@0xSouravAudit",
     url: "https://x.com/0xSouravAudit",
+    icon: SiX,
   },
 ];
 
 export const footerProfiles = [
-  { name: "GitHub", url: "https://github.com/Sourav-IIITBPL" },
-  { name: "Sherlock", url: "https://audits.sherlock.xyz/watson/sourav_DEV" },
-  { name: "Code4rena", url: "https://code4rena.com/@Sourav_DEV" },
-  { name: "Cantina", url: "https://cantina.xyz/u/0xSourav" },
-  { name: "LinkedIn", url: "https://linkedin.com/in/0xsourav" },
+  {
+    name: "GitHub",
+    url: "https://github.com/Sourav-IIITBPL",
+    icon: SiGithub,
+  },
+  {
+    name: "Sherlock",
+    url: "https://audits.sherlock.xyz/watson/sourav_DEV",
+    icon: FaviconIcon("sherlock.xyz"),
+  },
+  {
+    name: "Code4rena",
+    url: "https://code4rena.com/@Sourav_DEV",
+    icon: FaviconIcon("code4rena.com"),
+  },
+  {
+    name: "Cantina",
+    url: "https://cantina.xyz/u/0xSourav",
+    icon: FaviconIcon("cantina.xyz"),
+  },
+  {
+    name: "LinkedIn",
+    url: "https://linkedin.com/in/0xsourav",
+    icon: FaLinkedin,
+  },
 ];
